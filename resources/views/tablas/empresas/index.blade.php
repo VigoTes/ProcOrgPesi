@@ -5,11 +5,7 @@
 
 
 <div class="card">
-        <div class="card-header border-0">
-        
-
-
-          
+        <div class="card-header border-0">         
           <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
