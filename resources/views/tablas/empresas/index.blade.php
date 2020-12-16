@@ -6,17 +6,19 @@
  
 <div class="card">
         <div class="card-header border-0">         
-          <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
-            </div>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-          </div>
+         
 
-          <button type="button" class="btn btn-primary"> <i class="fas fa-search"></i> Buscar</button>
-          <button type="button" class="btn btn-primary"> <i class="fas fa-plus"></i> Agregar</button>
-          <button type="button" class="btn btn-primary"> <i class="fas fa-edit"></i> Editar</button>
-          <button type="button" class="btn btn-primary"> <i class="fas fa-trash-alt"></i> Eliminar</button>
+           <a href="{{route('empresa.create')}}" class = "btn btn-primary"> 
+                <i class="fas fa-plus"> </i> 
+                  Nuevo Registro
+           </a>
+
+            <nav class = "navbar float-right"> {{-- PARA MANDARLO A LA DERECHA --}}
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar por descripcion" aria-label="Search" id="buscarpor" name = "buscarpor" value ="{{($buscarpor)}}" >
+                    <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+            </nav>
 
 
           <div class="card-tools">
@@ -33,40 +35,42 @@
           <table class="table table-striped table-valign-middle">
             <thead>
             <tr>
+              <th>id</th>
               <th>Nombre de la Empresa</th>
               <th>RUC</th>
               <th>Direccion</th>
-              <th>TIPO</th>
+              <th>Opciones</th>
             </tr>
             </thead>
             <tbody>
 
-                    <?php
-                    /*     if ($result->num_rows > 0) {
-                            // output data of each row
-                            while($row = $result->fetch_assoc()) {
-                            echo "nombre:" . $row["nombre"]. " - apellidos: " . $row["apellidos"]. " DNI: " . $row["dni"]. "   ". $row["tipo"] ." <br>";
-                            }
-                        } else {
-                            echo "0 results";
-                        } */
-                 /*        $conn->close(); */
-                    ?> 
+            @foreach($empresa as $itemEmpresa)       
+                <tr>
+                    <td>{{$itemEmpresa->idEmpresa  }}</td>
+                    <td>{{$itemEmpresa->nombreEmpresa  }}</td>
+                    <td>{{$itemEmpresa->RUC}}</td>
+                    <td>{{$itemEmpresa->Direccion}}</td>
+                    
+                    <td>
 
-            <tr>
-              <td>Youtube S.A.C</td>
-              <td>152346235473</td>
-              <td>El porvenir MZ55</td>
-              <td>ONG</td>
-            </tr>
 
-            <tr>
-              <td>Discord E.I.R.L</td>
-              <td>1475475754</td>
-              <td>San Isidro calle oro 252</td>
-              <td>Sociedad</td>
-            </tr>
-                        
+                            {{-- MODIFICAR RUTAS DE Delete y Edit --}}
+                        <a href="{{route('empresa.edit',$itemEmpresa->idEmpresa)}}" class = "btn btn-warning">  
+                            <i class="fas fa-edit"> </i> 
+                            Editar
+                        </a>
+
+                        <a href="" class = "btn btn-danger"> 
+                            <i class="fas fa-trash-alt"> </i> 
+                            Eliminar
+                        </a>
+                    </td>
+
+                </tr>
+            @endforeach
+
+          
+
                           
 
 
