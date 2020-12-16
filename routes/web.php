@@ -10,6 +10,14 @@ Route::get('/bienvenido', function () {
     return view('bienvenido');
 });
 
+Route::get('/foda', function () {
+    return view('tablas.foda.index');
+});
+
+Route::get('/matriz', function () {
+    return view('tablas.matriz.index');
+});
+
 
 
 Route::resource('categoria', 'CategoriaController');  // es resource pq trabajamos con varias rutas 
