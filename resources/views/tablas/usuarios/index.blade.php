@@ -2,9 +2,9 @@
 @section('contenido')
 
 <h1> Bienvenido al Sistema </h1>
- @if (session('msjLlegada'))
+      @if (session('msj'))
         <div class ="alert alert-warning alert-dismissible fade show mt-3" role ="alert">
-            {{session('msjLlegada')}}
+            {{session('msj')}}
           <button type = "button" class ="close" data-dismiss="alert" aria-label="close">
               <span aria-hidden="true"> &times;</span>
           </button>
@@ -16,14 +16,14 @@
         <div class="card-header border-0">         
          
 
-           <a href="{{route('empresa.create')}}" class = "btn btn-primary"> 
+           <a href="{{route('usuarios.create')}}" class = "btn btn-primary"> 
                 <i class="fas fa-plus"> </i> 
                   Nuevo Registro
            </a>
 
             <nav class = "navbar float-right"> {{-- PARA MANDARLO A LA DERECHA --}}
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" aria-label="Search" id="buscarpor" name = "buscarpor" value ="{{($buscarpor)}}" >
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar por descripcion" aria-label="Search" id="buscarpor" name = "buscarpor" value ="{{($buscarpor)}}" >
                     <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
             </nav>
@@ -44,31 +44,31 @@
             <thead>
             <tr>
               <th>id</th>
-              <th>Nombre de la Empresa</th>
-              <th>RUC</th>
-              <th>Direccion</th>
+              <th>Usuario</th>
+              <th>Nombre </th>
+              <th>email</th>
               <th>Opciones</th>
             </tr>
             </thead>
             <tbody>
-
-            @foreach($empresa as $itemEmpresa)       
+            
+            @foreach($usuarios as $itemUsuario)       
                 <tr>
-                    <td>{{$itemEmpresa->idEmpresa  }}</td>
-                    <td>{{$itemEmpresa->nombreEmpresa  }}</td>
-                    <td>{{$itemEmpresa->RUC}}</td>
-                    <td>{{$itemEmpresa->direccion}}</td>
-                    
+                    <td>{{$itemUsuario->id}}</td>
+                    <td>{{$itemUsuario->name}}</td>
+                    <td>{{$itemUsuario->nombres.' '.$itemUsuario->apellidos}}</td>
+                    <td>{{$itemUsuario->email}}</td>
+                   
                     <td>
 
 
                             {{-- MODIFICAR RUTAS DE Delete y Edit --}}
-                        <a href="{{route('empresa.edit',$itemEmpresa->idEmpresa)}}" class = "btn btn-warning">  
+                        <a href="{{route('usuarios.edit',$itemUsuario->id)}}" class = "btn btn-warning">  
                             <i class="fas fa-edit"> </i> 
                             Editar
                         </a>
 
-                        <a href="{{route('empresa.confirmar',$itemEmpresa->idEmpresa)}}" class = "btn btn-danger"> 
+                        <a href="{{route('usuarios.confirmar',$itemUsuario->id)}}" class = "btn btn-danger"> 
                             <i class="fas fa-trash-alt"> </i> 
                             Eliminar
                         </a>

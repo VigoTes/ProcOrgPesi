@@ -42,7 +42,7 @@
                             <tr>
                             <th scope="col" style = "width: 10%;">id</th>
                             <th scope="col" style = "width: 65%;">Fortaleza</th>
-                            <th scope="col" style = "width: 25%;">Opciones</th>
+                            <th scope="col" style = "width: 10%;">Opciones</th>
                             
                             </tr>
                         </thead>
@@ -51,13 +51,13 @@
 
                                 <td>1</td>
                                 <td>Mark</td>
-                                <td> <a href="" class = "btn btn-warning">  
-                                        <i class="fas fa-edit"> </i> 
+                                <td> <a href="" class = "btn btn-warning btn-sm">  
+                                        <i class="fas fa-edit fa-sm"> </i> 
                                        
                                     </a>
 
-                                    <a href="" class = "btn btn-danger"> 
-                                        <i class="fas fa-trash-alt"> </i> 
+                                    <a href="" class = "btn btn-danger btn-sm"> 
+                                        <i class="fas fa-trash-alt fa-sm"> </i> 
                                  
                                     </a>   
                                 </td>
@@ -103,7 +103,7 @@
                             <tr>
                             <th scope="col" style = "width: 10%;">id</th>
                             <th scope="col" style = "width: 65%;">Fortaleza</th>
-                            <th scope="col" style = "width: 25%;">Opciones</th>
+                            <th scope="col" style = "width: 10%;">Opciones</th>
                             
                             </tr>
                         </thead>
@@ -112,14 +112,14 @@
 
                                 <td>1</td>
                                 <td>Mark</td>
-                                <td> <a href="" class = "btn btn-warning">  
-                                        <i class="fas fa-edit"> </i> 
-                                    
+                                <td> <a href="" class = "btn btn-warning btn-sm">  
+                                        <i class="fas fa-edit fa-sm"> </i> 
+                                       
                                     </a>
 
-                                    <a href="" class = "btn btn-danger"> 
-                                        <i class="fas fa-trash-alt"> </i> 
-                             
+                                    <a href="" class = "btn btn-danger btn-sm"> 
+                                        <i class="fas fa-trash-alt fa-sm"> </i> 
+                                 
                                     </a>   
                                 </td>
                             </tr>
@@ -160,7 +160,7 @@
                             <tr>
                             <th scope="col" style = "width: 10%;">id</th>
                             <th scope="col" style = "width: 65%;">Fortaleza</th>
-                            <th scope="col" style = "width: 25%;">Opciones</th>
+                            <th scope="col" style = "width: 10%;">Opciones</th>
                             
                             </tr>
                         </thead>
@@ -169,14 +169,14 @@
 
                                 <td>1</td>
                                 <td>Mark</td>
-                                <td> <a href="" class = "btn btn-warning">  
-                                        <i class="fas fa-edit"> </i> 
-                                
+                                <td> <a href="" class = "btn btn-warning btn-sm">  
+                                        <i class="fas fa-edit fa-sm"> </i> 
+                                       
                                     </a>
 
-                                    <a href="" class = "btn btn-danger"> 
-                                        <i class="fas fa-trash-alt"> </i> 
-                                   
+                                    <a href="" class = "btn btn-danger btn-sm"> 
+                                        <i class="fas fa-trash-alt fa-sm"> </i> 
+                                 
                                     </a>   
                                 </td>
                             </tr>
@@ -214,7 +214,7 @@
                             <tr>
                             <th scope="col" style = "width: 10%;">id</th>
                             <th scope="col" style = "width: 65%;">Fortaleza</th>
-                            <th scope="col" style = "width: 25%;">Opciones</th>
+                            <th scope="col" style = "width: 10%;">Opciones</th>
                             
                             </tr>
                         </thead>
@@ -223,14 +223,14 @@
 
                                 <td>1</td>
                                 <td>Mark</td>
-                                <td> <a href="" class = "btn btn-warning">  
-                                        <i class="fas fa-edit"> </i> 
-                              
+                                <td> <a href="" class = "btn btn-warning btn-sm">  
+                                        <i class="fas fa-edit fa-sm"> </i> 
+                                       
                                     </a>
 
-                                    <a href="" class = "btn btn-danger"> 
-                                        <i class="fas fa-trash-alt"> </i> 
-                                    
+                                    <a href="" class = "btn btn-danger btn-sm"> 
+                                        <i class="fas fa-trash-alt fa-sm"> </i> 
+                                 
                                     </a>   
                                 </td>
                             </tr>

@@ -12,7 +12,7 @@ class Empresa extends Model
     public $timestamps = false;  //para que no trabaje con los campos fecha 
 
         // le indicamos los campos de la tabla 
-        protected $fillable = ['nombreEmpresa','RUC','Direccion','mision','vision','factorDif','propuestaV'];
+        protected $fillable = ['nombreEmpresa','ruc','direccion','mision','vision','factorDif','propuestaV','estadoAct'];
 
 
 }

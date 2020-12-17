@@ -42,6 +42,7 @@
               <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
               </li>
+
             </ul>
 
 
@@ -105,13 +106,57 @@
 
 
           <li class="nav-item">
-            <a href="usuarios.php" class="nav-link">
+            <a href="{{route('user.index')}}" class="nav-link">
               <i class="fas fa-users"></i>
               <p>
                 Usuarios
               </p>
             </a>
           </li>
+
+        <li class="nav-item menu-closed">
+            <a href="#" class="nav-link">
+              <i class="fas fa-list-alt"></i>
+              <p>
+                Estrategias
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./estrategiasFO" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>FO</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="./estrategiasFA" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>FA</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="./estrategiasDO" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>DO</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="./estrategiasDA" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>DA</p>
+                </a>
+              </li>
+              
+
+            </ul>
+          </li>
+
+
 
         </ul>
       </nav>
