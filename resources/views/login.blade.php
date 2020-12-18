@@ -2,7 +2,7 @@
 <html>
 <head>
 	 <meta charset="utf-8"/>
-     <title>.::SISTEMA DE VENTAS - ABC::.</title>
+     <title>Sistema FODA</title>
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta content="width=device-width, initial-scale=1.0" name="viewport"/>      
      <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
@@ -15,8 +15,12 @@
 <body class="login"> 
 
         <div class="logo">
-            <img src="{{asset('/img/visa.png')}}" alt="Sistema de Ventas & ABC">
-            <p>Sistema de Ventas & ABC</p>
+          {{--   <img src="{{asset('/img/visa.png')}}" alt="Sistema de Ventas & ABC"> --}}
+            <p>
+            <H3>
+            Sistema de gestión de información institucional y matriz FODA
+            </h3>
+            </p>
         </div>
         <div class="content">                         
             <form method="POST" action="{{route('user.login')}}">
@@ -56,7 +60,7 @@
             </form>            
         </div>
         <div class="copyright">
-            2020 &copy; Sistema de Ventas & ABC.
+            2020 &copy; PESI.
         </div>
         <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
         <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

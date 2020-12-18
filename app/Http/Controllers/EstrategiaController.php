@@ -152,7 +152,8 @@ class EstrategiaController extends Controller
     public function edit($id)
     {        
         $estrategia=Estrategia::findOrFail($id);
-        return view('tablas.estrategias.edit',compact('estrategia'));
+        $empresaFocus = Empresa::findOrFail($estrategia->idEmpresa);
+        return view('tablas.estrategias.edit',compact('estrategia','empresaFocus'));
     }
 
     /**
@@ -244,7 +245,8 @@ class EstrategiaController extends Controller
 
     public function confirmar($id){
         $estrategia = Estrategia::findOrFail($id); 
-        return view('tablas.estrategias.confirmar',compact('estrategia'));
+        $empresaFocus = Empresa::findOrFail($estrategia->idEmpresa);
+        return view('tablas.estrategias.confirmar',compact('estrategia','empresaFocus'));
     }
 
 

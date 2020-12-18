@@ -26,7 +26,18 @@ class UserController extends Controller
                 $password=$request->get('password');    //guardamos la contraseña ingresada en password
                 if(password_verify($password,$hashp))       //comparamos con el metodo password_verifi ??¡ xdd
                 {
-                    return view('bienvenido');
+                        // Preguntamos si es admin o no
+                    if($name=='admin')
+                    {
+                        return view('bienvenido');
+                    }//si es user normal
+                    else{
+
+                        
+                    }
+                    
+                
+                
                 }
                 else{
                     return back()->withErrors(['password'=>'Contraseña no válido'])->withInput([request('password')]);

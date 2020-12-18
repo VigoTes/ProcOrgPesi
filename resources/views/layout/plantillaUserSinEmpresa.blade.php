@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +22,7 @@
  
 
   </head>
+
 
 
 
@@ -96,15 +96,7 @@
         
         <div class="info">
           <a href="#" class="d-block">Empresa Seleccionada: <br> 
-                <div style="font-weight: bold;">
-               
-                     @if(isset($empresaFocus))
-                        {{$empresaFocus->nombreEmpresa}}
-                    @else
-                        Ninguna
-                    @endif 
-                
-                </div>
+                <div style="font-weight: bold;">Ninguna</div>
           </a>
         </div>
         
@@ -117,7 +109,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item menu">    {{-- AQUI FALTARIA LA SELECCION --}}
-            <a href="{{route('empresa.index')}}" class="nav-link">
+            <a href="{{route('empresa.index','0')}}" class="nav-link">
               <i class="fas fa-briefcase"></i>
               <p>
                 Mis Empresas
@@ -125,7 +117,7 @@
             </a>
           </li>
           <li class="nav-item menu">    {{-- AQUI FALTARIA LA SELECCION --}}
-            <a href="{{route('empresa.edit',$empresaFocus->idEmpresa)}}" class="nav-link">
+            <a href="" class="nav-link">
               <i class="fas fa-briefcase"></i>
               <p>
                 Institucional
@@ -135,7 +127,7 @@
 
 
           <li class="nav-item">{{-- AQUI VA LA RUTA  --}}
-            <a href="{{route('empresa.foda',$empresaFocus->idEmpresa)}}" class="nav-link">
+            <a href="" class="nav-link">
               <i class="fas fa-users"></i>
               <p>
                 FODA
@@ -143,49 +135,49 @@
             </a>
           </li>
 
-          <li class="nav-item menu-open">
-              <a href="" class="nav-link">
-                <i class="fas fa-list-alt"></i>
-                <p>
-                  Estrategias
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
+          <li class="nav-item menu-closed">
+            <a href="" class="nav-link">
+              <i class="fas fa-list-alt"></i>
+              <p>
+                Estrategias
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
 
-              <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="{{route('empresa.estrategiasFO',$empresaFocus->idEmpresa)}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>FO</p>
-                      </a>
-                    </li>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>FO</p>
+                </a>
+              </li>
 
-                    <li class="nav-item">
-                      <a href="{{route('empresa.estrategiasFA',$empresaFocus->idEmpresa)}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>FA</p>
-                      </a>
-                    </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>FA</p>
+                </a>
+              </li>
 
-                    <li class="nav-item">
-                      <a href="{{route('empresa.estrategiasDO',$empresaFocus->idEmpresa)}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>DO</p>
-                      </a>
-                    </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>DO</p>
+                </a>
+              </li>
 
-                    <li class="nav-item">
-                      <a href="{{route('empresa.estrategiasDA',$empresaFocus->idEmpresa)}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>DA</p>
-                      </a>
-                    </li>
-                    
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>DA</p>
+                </a>
+              </li>
+              
 
-              </ul>
+            </ul>
           </li>
           <li class="nav-item">{{-- AQUI VA LA RUTA  --}}
-            <a href="{{route('empresa.matriz',$empresaFocus->idEmpresa)}}" class="nav-link">
+            <a href="{{url('/foda')}}" class="nav-link">
               <i class="fas fa-users"></i>
               <p>
                 Matriz

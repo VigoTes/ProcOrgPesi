@@ -114,7 +114,7 @@
             </a>
           </li>
 
-        <li class="nav-item menu-closed">
+         {{-- <li class="nav-item menu-closed">
             <a href="#" class="nav-link">
               <i class="fas fa-list-alt"></i>
               <p>
@@ -154,7 +154,7 @@
               
 
             </ul>
-          </li>
+          </li> --}}
 
 
 

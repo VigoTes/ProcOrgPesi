@@ -18,14 +18,37 @@ class EmpresaController extends Controller
         $empresa = Empresa::where('estadoAct','=','1')
             ->where('nombreEmpresa','like','%'.$buscarpor.'%')
             ->paginate($this::PAGINATION);
+        $empresaFocus = new Empresa();
+        $empresaFocus->nombreEmpresa = 'Ninguna';
+        $empresaFocus->idEmpresa = 0;
 
         //cuando vaya al index me retorne a la vista
-        return view    ('tablas.empresas.index',compact('empresa','buscarpor')); 
+        return view    ('tablas.empresas.index',compact('empresa','buscarpor','empresaFocus')); 
         //el compact es para pasar los datos , para meter mas variables meterle mas comas dentro del compact
 
 
         // otra forma sería hacer ['categoria'] => $categoria
     }
+
+
+
+    //PARA SELECCIONAR UNA EMPRESA Y QUE ESTÉ EN FOCUS PUES 
+    public function listar(Request $Request, $id) //MTODO PROBANDO BORRAR SI QUIERES
+    {
+        $buscarpor = $Request->buscarpor;
+        $empresa = Empresa::where('estadoAct','=','1')
+            ->where('nombreEmpresa','like','%'.$buscarpor.'%')
+            ->paginate($this::PAGINATION);
+        $empresaFocus = Empresa::findOrFail($id);
+
+        //cuando vaya al index me retorne a la vista
+        return view('tablas.empresas.index',compact('empresa','buscarpor','empresaFocus')); 
+        //el compact es para pasar los datos , para meter mas variables meterle mas comas dentro del compact
+
+
+        // otra forma sería hacer ['categoria'] => $categoria
+    }
+    
 
     public function create()
     {
@@ -104,12 +127,14 @@ class EmpresaController extends Controller
 
     public function edit($id)
     {
-        
+        if($id==0) //si no ha seleccionado una empresa, lo redirije al index para que escoja una
+            return redirect()->route('empresa.index')->with('msjLlegada','Error: Debe escoger una empresa para editar.');
+                
         $empresa=Empresa::findOrFail($id);
         $listaObjetivos=Objetivo::where('empresa_idEmpresa','=',$id)->get();
-        
+        $empresaFocus = $empresa; 
 
-        return view('tablas.empresas.edit',compact('empresa','listaObjetivos'));
+        return view('tablas.empresas.edit',compact('empresa','listaObjetivos','empresaFocus'));
 
 
     }
@@ -186,8 +211,13 @@ class EmpresaController extends Controller
     */
     public function foda($id){
             // DESPLIEGA LA VISTA DE FODA HACIENDO SELECTS DE LA BD 
+        if($id==0) //si no ha seleccionado una empresa, lo redirije al index para que escoja una
+            return redirect()->route('empresa.index')->with('msjLlegada','Error: Debe escoger una empresa para editar.');
+           
+
+
         $empresa = Empresa::findOrFail($id); 
-        
+        $empresaFocus = $empresa;
         
         $fortalezas = Elemento::where('empresa_idEmpresa','=',$id)
         ->where('tipo','=','F')->get();
@@ -200,7 +230,7 @@ class EmpresaController extends Controller
 
        // return redirect()->route('empresa.foda',$id)->with('msjLlegada','Registro nuevo guardado');
                
-        return view('tablas.foda.index',compact('empresa','fortalezas','debilidades','oportunidades','amenazas'));
+        return view('tablas.foda.index',compact('empresa','fortalezas','debilidades','oportunidades','amenazas','empresaFocus'));
         
     }
     
@@ -208,7 +238,12 @@ class EmpresaController extends Controller
 
     public function estrategiasFO($id){
         // DESPLIEGA LA VISTA DE ESTRATEGIAS HACIENDO SELECTS DE LA BD 
+        if($id==0) //si no ha seleccionado una empresa, lo redirije al index para que escoja una
+            return redirect()->route('empresa.index')->with('msjLlegada','Error: Debe escoger una empresa para editar.');
+        
+
         $empresa = Empresa::findOrFail($id); 
+        $empresaFocus = $empresa;
         $fortalezas = Elemento::where('empresa_idEmpresa','=',$id)
         ->where('tipo','=','F')->get();
         $oportunidades = Elemento::where('empresa_idEmpresa','=',$id)
@@ -219,13 +254,17 @@ class EmpresaController extends Controller
 
     // return redirect()->route('empresa.foda',$id)->with('msjLlegada','Registro nuevo guardado');
             
-        return view('tablas.estrategias.FO',compact('empresa','fortalezas','oportunidades','estrategiasFO'));    
+        return view('tablas.estrategias.FO',compact('empresa','fortalezas','oportunidades','estrategiasFO','empresaFocus'));    
     }
 
     public function estrategiasFA($id){
         // DESPLIEGA LA VISTA DE ESTRATEGIAS HACIENDO SELECTS DE LA BD 
-        $empresa = Empresa::findOrFail($id); 
+        if($id==0) //si no ha seleccionado una empresa, lo redirije al index para que escoja una
+            return redirect()->route('empresa.index')->with('msjLlegada','Error: Debe escoger una empresa para editar.');
+        
 
+        $empresa = Empresa::findOrFail($id); 
+        $empresaFocus = $empresa;
 
         $fortalezas = Elemento::where('empresa_idEmpresa','=',$id)
         ->where('tipo','=','F')->get();
@@ -236,13 +275,17 @@ class EmpresaController extends Controller
         ->where('tipo','=','FA')->get();
 
 
-        return view('tablas.estrategias.FA',compact('empresa','fortalezas','amenazas','estrategiasFA'));    
+        return view('tablas.estrategias.FA',compact('empresa','fortalezas','amenazas','estrategiasFA','empresaFocus'));    
     }
     
     public function estrategiasDO($id){
         // DESPLIEGA LA VISTA DE ESTRATEGIAS HACIENDO SELECTS DE LA BD 
-        $empresa = Empresa::findOrFail($id); 
 
+        if($id==0) //si no ha seleccionado una empresa, lo redirije al index para que escoja una
+            return redirect()->route('empresa.index')->with('msjLlegada','Error: Debe escoger una empresa para editar.');
+        
+        $empresa = Empresa::findOrFail($id); 
+        $empresaFocus = $empresa;
 
         $debilidades = Elemento::where('empresa_idEmpresa','=',$id)
         ->where('tipo','=','D')->get();
@@ -253,14 +296,18 @@ class EmpresaController extends Controller
         ->where('tipo','=','DO')->get();
 
 
-        return view('tablas.estrategias.DO',compact('empresa','debilidades','oportunidades','estrategiasDO'));    
+        return view('tablas.estrategias.DO',compact('empresa','debilidades','oportunidades','estrategiasDO','empresaFocus'));    
     }
     
     public function estrategiasDA($id){
         // DESPLIEGA LA VISTA DE ESTRATEGIAS HACIENDO SELECTS DE LA BD 
+
+        if($id==0) //si no ha seleccionado una empresa, lo redirije al index para que escoja una
+            return redirect()->route('empresa.index')->with('msjLlegada','Error: Debe escoger una empresa para editar.');
+        
         $empresa = Empresa::findOrFail($id); 
 
-
+        $empresaFocus = $empresa;
         $debilidades = Elemento::where('empresa_idEmpresa','=',$id)
         ->where('tipo','=','D')->get();
         $amenazas = Elemento::where('empresa_idEmpresa','=',$id)
@@ -270,12 +317,16 @@ class EmpresaController extends Controller
         ->where('tipo','=','DA')->get();
 
 
-        return view('tablas.estrategias.DA',compact('empresa','debilidades','amenazas','estrategiasDA'));    
+        return view('tablas.estrategias.DA',compact('empresa','debilidades','amenazas','estrategiasDA','empresaFocus'));    
     }
     
     public function matriz($id){ // le pasamos el id de la empresa
-        $empresa = Empresa::findOrFail($id);
 
+        if($id==0) //si no ha seleccionado una empresa, lo redirije al index para que escoja una
+            return redirect()->route('empresa.index')->with('msjLlegada','Error: Debe escoger una empresa para editar.');
+        
+        $empresa = Empresa::findOrFail($id);
+        $empresaFocus = $empresa;
         $fortalezas = Elemento::where('empresa_idEmpresa','=',$id)
         ->where('tipo','=','F')->get();
         $debilidades = Elemento::where('empresa_idEmpresa','=',$id)
@@ -298,7 +349,8 @@ class EmpresaController extends Controller
         return view('tablas.matriz.index',
             compact('empresa',
             'fortalezas','debilidades','oportunidades','amenazas',
-            'estrategiasFO','estrategiasFA','estrategiasDO','estrategiasDA'
+            'estrategiasFO','estrategiasFA','estrategiasDO','estrategiasDA',
+            'empresaFocus'
             ));    
     
 

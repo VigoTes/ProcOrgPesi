@@ -25,12 +25,17 @@ Route::resource('estrategia', 'EstrategiaController');  // es resource pq trabaj
 
 /* ************************** RUTAS ADICIONALES  ********************* */
 
+
+Route::get ('empresa/{id}/listar','EmpresaController@listar')->name('empresa.listar');
+
+
 Route::get ('empresa/{id}/foda','EmpresaController@foda')->name('empresa.foda');
 Route::get ('empresa/{id}/matriz','EmpresaController@matriz')->name('empresa.matriz');
 Route::get ('empresa/{id}/estrategiasFO','EmpresaController@estrategiasFO')->name('empresa.estrategiasFO');
 Route::get ('empresa/{id}/estrategiasFA','EmpresaController@estrategiasFA')->name('empresa.estrategiasFA');
 Route::get ('empresa/{id}/estrategiasDO','EmpresaController@estrategiasDO')->name('empresa.estrategiasDO');
 Route::get ('empresa/{id}/estrategiasDA','EmpresaController@estrategiasDA')->name('empresa.estrategiasDA');
+
 
 // ************************* RUTAS DE CONFIRMACION  
 Route::get ('empresa/{id}/confirmar','EmpresaController@confirmar')->name('empresa.confirmar');

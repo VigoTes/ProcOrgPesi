@@ -54,8 +54,9 @@ class ObjetivoController extends Controller
             // ahora tenemos que volver a la vista de empresa.edit
 
             $empresa = Empresa::findOrFail($request->idEmpresaa);
+            $empresaFocus = $empresa ;
             $listaObjetivos=Objetivo::where('empresa_idEmpresa','=',$request->idEmpresaa)->get();
-            return view('tablas.empresas.edit',compact('empresa','listaObjetivos'));
+            return view('tablas.empresas.edit',compact('empresa','listaObjetivos','empresaFocus'));
 
 
                // return redirect()->route('.index')->with('datos','Registro nuevo guardado');
@@ -85,8 +86,8 @@ class ObjetivoController extends Controller
     {
         $objetivo=Objetivo::findOrFail($idObjetivoEst);
         $empresa=Empresa::findOrFail($objetivo->empresa_idEmpresa);
-        
-        return view('tablas.objetivos.edit',compact('objetivo','empresa'));
+        $empresaFocus = $empresa;
+        return view('tablas.objetivos.edit',compact('objetivo','empresa','empresaFocus'));
     }
 
     /**
@@ -112,9 +113,13 @@ class ObjetivoController extends Controller
         
 
         $empresa = Empresa::findOrFail($objetivo->empresa_idEmpresa);
+      /*   $empresaFocus =  $empresa;
         $listaObjetivos=Objetivo::where('empresa_idEmpresa','=',$objetivo->empresa_idEmpresa)->get();
-        
-        return view('tablas.empresas.edit',compact('empresa','listaObjetivos'));
+         */
+        return redirect()->route('empresa.edit',$objetivo->empresa_idEmpresa);
+
+
+      //  return view('tablas.empresas.edit',compact('empresa','listaObjetivos','empresaFocus'));
 
     }
 
@@ -126,23 +131,28 @@ class ObjetivoController extends Controller
      */
     public function destroy($id)
     {
-        $objetivo = Objetivo::find($id);
-        $empresa = Empresa::findOrFail($objetivo->empresa_idEmpresa);
         
+        $objetivo = Objetivo::findOrFail($id);
+        $empresa = Empresa::findOrFail($objetivo->empresa_idEmpresa);
+        $empresaFocus = $empresa;
         $objetivo->delete();
 
         $listaObjetivos=Objetivo::where('empresa_idEmpresa','=',$objetivo->empresa_idEmpresa)->get();
         
 
-        
-        return view('tablas.empresas.edit',compact('empresa','listaObjetivos'));
+        return redirect()->route('empresa.edit',$objetivo->empresa_idEmpresa);
+
+
+        //return view('tablas.empresas.edit',compact('empresa','listaObjetivos','empresaFocus'));
 
     }
 
     public function confirmar($id)
     {
         $objetivo = Objetivo::findOrFail($id); 
-        return view('tablas.objetivos.confirmar',compact('objetivo'));
+        $empresaFocus = Empresa::findOrFail($objetivo->empresa_idEmpresa);
+
+        return view('tablas.objetivos.confirmar',compact('objetivo','empresaFocus'));
 
 
     }

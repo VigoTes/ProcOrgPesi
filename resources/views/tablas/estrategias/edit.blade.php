@@ -1,8 +1,5 @@
-@extends('layout.plantilla')
+@extends('layout.plantillaUser')
 @section('contenido')
-
-
-
     <form method="POST" action="{{route('estrategia.update',$estrategia->idEstrategia)}}">
             @method('put')
             @csrf

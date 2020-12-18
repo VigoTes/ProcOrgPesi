@@ -1,4 +1,4 @@
-@extends('layout.plantilla')
+@extends('layout.plantillaUser')
 @section('contenido')
 
 <h1> Bienvenido al Sistema </h1>
@@ -48,10 +48,12 @@
               <th>RUC</th>
               <th>Direccion</th>
               <th>Opciones</th>
+              <th>Seleccion</th>
+              
             </tr>
             </thead>
             <tbody>
-
+            
             @foreach($empresa as $itemEmpresa)       
                 <tr>
                     <td>{{$itemEmpresa->idEmpresa  }}</td>
@@ -73,7 +75,7 @@
                             Eliminar
                         </a>
 
-                        <a href="{{route('empresa.foda',$itemEmpresa->idEmpresa)}}" class = "btn btn-danger"> 
+                        {{-- <a href="{{route('empresa.foda',$itemEmpresa->idEmpresa)}}" class = "btn btn-danger"> 
                             <i class="fas fa-trash-alt"> </i> 
                             FODA
                         </a>
@@ -81,15 +83,24 @@
                         <a href="{{route('empresa.estrategiasFO',$itemEmpresa->idEmpresa)}}" class = "btn btn-danger"> 
                             <i class="fas fa-trash-alt"> </i> 
                             EstrFO
-                        </a>
+                        </a> --}}
 
-                        
-                        
                     </td>
+                    <td>
 
+                      <div class="custom-control custom-radio">
+
+                        <a href="{{route('empresa.listar',$itemEmpresa->idEmpresa)}}" class = "btn-outline-primary btn-ms"> 
+                            <i class="fas fa-mouse-pointer"></i>
+                            Seleccionar
+                        </a>
+                      </div>
+
+                    </td>
+                    
                 </tr>
             @endforeach
-
+            
           
 
                           

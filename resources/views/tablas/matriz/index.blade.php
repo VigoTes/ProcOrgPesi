@@ -1,6 +1,6 @@
 
 
-@extends('layout.plantilla')
+@extends('layout.plantillaUser')
 @section('contenido')
 
 
