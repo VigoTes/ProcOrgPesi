@@ -75,6 +75,8 @@ class EstrategiaController extends Controller
         }
         $cadA = trim($cadA, '&');
         
+        
+
         $estrategia = new Estrategia();
         $estrategia->descripcion  = $request->descripcion;
         $estrategia->tipo  = $request->tipoEstrategia;
@@ -82,37 +84,44 @@ class EstrategiaController extends Controller
         
         $tipoX =  $estrategia->tipo;
 
+        $id = $request->idEmpresa;
  
         switch ($tipoX) {
             case "FO":
-                
                 $estrategia->id1 = $cadF;
                 $estrategia->id2 = $cadO;
-                break;
+                if( strlen($cadF) < 1 or strlen($cadO)< 1 )
+                    return redirect()->route('empresa.estrategiasFO',$id);
+
+                break;  
             case 'FA':
                 $estrategia->id1 = $cadF;
                 $estrategia->id2 = $cadA;
+                if( strlen($cadF) < 1 or strlen($cadA)<1 )
+                    return redirect()->route('empresa.estrategiasFA',$id);
+                
                 break;
             case 'DO':
                 $estrategia->id1 = $cadD;
                 $estrategia->id2 = $cadO;
+                if( strlen($cadD) < 1 or strlen($cadO)<1 )
+                    return redirect()->route('empresa.estrategiasDO',$id);
+                
                 break;
             case 'DA':
                 $estrategia->id1 = $cadD;
                 $estrategia->id2 = $cadA;
+                if( strlen($cadD) < 1 or strlen($cadA)<1 )
+                    return redirect()->route('empresa.estrategiasDA',$id);
+                
                 break;  
         }
         $estrategia->save();
-        
-        $id = $request->idEmpresa;
-
-        
          
             switch ($tipoX) {
                 case "FO":
                     return redirect()->route('empresa.estrategiasFO',$id);
 
-               
                     break;
                 case 'FA':
                     return redirect()->route('empresa.estrategiasFA',$id);

@@ -2,7 +2,7 @@
 @section('contenido')
 
 <h1> Bienvenido al Sistema </h1>
- @if (session('msjLlegada'))
+      @if (session('msjLlegada'))
         <div class ="alert alert-warning alert-dismissible fade show mt-3" role ="alert">
             {{session('msjLlegada')}}
           <button type = "button" class ="close" data-dismiss="alert" aria-label="close">

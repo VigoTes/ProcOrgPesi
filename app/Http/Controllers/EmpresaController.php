@@ -8,11 +8,13 @@ use App\Objetivo;
 use App\Elemento;
 use App\Estrategia;
 use Illuminate\Support\Facades\Auth;
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class EmpresaController extends Controller
 {
     const PAGINATION = 10; // PARA QUE PAGINEE DE 10 EN 10
+    
+    
 
     public function index(Request $Request)
     {
@@ -199,6 +201,7 @@ class EmpresaController extends Controller
 
     public function destroy($id)
     {
+
         $empresa = Empresa::findOrFail($id);
         $empresa->estadoAct = '0';
         $empresa->save ();
@@ -218,8 +221,12 @@ class EmpresaController extends Controller
             // DESPLIEGA LA VISTA DE FODA HACIENDO SELECTS DE LA BD 
         if($id==0) //si no ha seleccionado una empresa, lo redirije al index para que escoja una
             return redirect()->route('empresa.index')->with('msjLlegada','Error: Debe escoger una empresa para editar.');
-           
-
+        
+        $bandera=false;
+        if($id<0){
+            $id=-$id;
+            $bandera=true;
+        }
 
         $empresa = Empresa::findOrFail($id); 
         $empresaFocus = $empresa;
@@ -234,8 +241,13 @@ class EmpresaController extends Controller
         ->where('tipo','=','A')->get();
 
        // return redirect()->route('empresa.foda',$id)->with('msjLlegada','Registro nuevo guardado');
-               
-        return view('tablas.foda.index',compact('empresa','fortalezas','debilidades','oportunidades','amenazas','empresaFocus'));
+       if($bandera) //error del tipo: 
+                 return redirect() -> route('empresa.foda',$id)->with('msjLlegada','Error: este elemento se está usando en alguna estrategia.');
+
+        
+                 return view('tablas.foda.index',compact('empresa',
+                    'fortalezas','debilidades','oportunidades','amenazas',
+                    'empresaFocus'));
         
     }
     
@@ -362,15 +374,108 @@ class EmpresaController extends Controller
 
     }
 
- /*    public function ExportarPDF($id){
+    public function ExportarPDF($id){
         //COMANDO PARA EL COMPLEMENTO PARA PDF
         //composer require barryvdh/laravel-dompdf
         //COMPOSER: es un gestor para dependencias de laravel en la nube (se guarda en vendor)
-           $pdf = PDF::loadView(
-            redirect()->route('matriz','id')
-                             )->setPaper('a4', 'landscape');
+        $empresa = Empresa::findOrFail($id);
+        $empresaFocus = $empresa;
+
+        $fortalezas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','F')->get();
+        $debilidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','D')->get();
+        $oportunidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','O')->get();
+        $amenazas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','A')->get();
+
+
+        $estrategiasFO = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','FO')->get();
+        $estrategiasFA = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','FA')->get();
+        $estrategiasDO = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','DO')->get();
+        $estrategiasDA = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','DA')->get();
+
+
+
+/*         $pdf = PDF::loadView( 
+            view('tablas.matriz.index',
+                compact('empresa',
+                'fortalezas','debilidades','oportunidades','amenazas',
+                'estrategiasFO','estrategiasFA','estrategiasDO','estrategiasDA',
+                'empresaFocus'
+                        )
+                )
+            )->setPaper('a4', 'landscape');
+ */
+
+            $pdf = PDF::loadView( 
+                'tablas.matriz.imprimir',
+                    array('empresa'=>$empresa,
+                    'fortalezas'=>$fortalezas,'debilidades'=>$debilidades,'oportunidades'=>$oportunidades,'amenazas'=>$amenazas,
+                    'estrategiasFO'=>$estrategiasFO,'estrategiasFA'=>$estrategiasFA,'estrategiasDO'=>$estrategiasDO,'estrategiasDA'=>$estrategiasDA,
+                    'empresaFocus'=>$empresaFocus
+                            )
+                    
+                )->setPaper('a4', 'landscape');
+             
+
+
+      /*      $pdf = PDF::loadView(
+            redirect()->route('empresa.matriz','id')
+                             )->setPaper('a4', 'landscape'); */
+
         return $pdf->download('MatrizFODA.pdf');
+
     }
-  */
+ 
+    
+    public function imprimir($id){
+        //COMANDO PARA EL COMPLEMENTO PARA PDF
+        //composer require barryvdh/laravel-dompdf
+        //COMPOSER: es un gestor para dependencias de laravel en la nube (se guarda en vendor)
+        $empresa = Empresa::findOrFail($id);
+        $empresaFocus = $empresa;
+
+        $fortalezas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','F')->get();
+        $debilidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','D')->get();
+        $oportunidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','O')->get();
+        $amenazas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','A')->get();
+
+
+        $estrategiasFO = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','FO')->get();
+        $estrategiasFA = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','FA')->get();
+        $estrategiasDO = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','DO')->get();
+        $estrategiasDA = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','DA')->get();
+
+ 
+
+            return view( 
+                'tablas.matriz.imprimir',
+                    array('empresa'=>$empresa,
+                    'fortalezas'=>$fortalezas,'debilidades'=>$debilidades,'oportunidades'=>$oportunidades,'amenazas'=>$amenazas,
+                    'estrategiasFO'=>$estrategiasFO,'estrategiasFA'=>$estrategiasFA,'estrategiasDO'=>$estrategiasDO,'estrategiasDA'=>$estrategiasDA,
+                    'empresaFocus'=>$empresaFocus
+            ));
+
+
+    }
+
+    
+
+
+
 
 }

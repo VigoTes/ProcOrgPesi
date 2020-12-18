@@ -13,7 +13,16 @@
           <input type="hidden" id="tipoEstrategia" name="tipoEstrategia" value ="FO">
      {{-- INPUT INVISIBLE PARA GUARDAR EL id de la empresa --}}   
           <input type="hidden" id="idEmpresa" name="idEmpresa" value ="{{$empresa->idEmpresa}}">
-                            
+    
+    @if (session('msj'))
+        <div class ="alert alert-warning alert-dismissible fade show mt-3" role ="alert">
+            {{session('msj')}}
+          <button type = "button" class ="close" data-dismiss="alert" aria-label="close">
+              <span aria-hidden="true"> &times;</span>
+          </button>
+          
+        </div>
+      @ENDIF                        
 
     <br>
     <div class="container" Style = "font-size:10pt;">

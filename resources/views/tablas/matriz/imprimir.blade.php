@@ -1,32 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
 
 
-@extends('layout.plantillaUser')
-@section('contenido')
+
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" >
+    <title>FODA System</title>
+
+    
+    <!-- Google Font: Source Sans Pro -->
+    {{-- <link rel="stylesheet" 
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+    <!-- Font Awesome Icons --> --}}
 
 
+      {{-- <link  media="all"  rel="stylesheet"
+         href="{{public_path('/adminlte/dist/css/adminlte.min.css') }}" />
+  
+      <link  media="all"  rel="stylesheet"
+         href="/adminlte/dist/css/adminlte.min.css" />
+
+      <link rel="stylesheet" 
+        href="{{ ltrim(public_path('/adminlte/dist/css/adminlte.min.css'), '/') }}" />
+ --}}
+
+
+    <!-- Font Awesome ESTOS SON LOS ICONOS WE XD-->
+    {{-- <link type="text/css"   rel="stylesheet" 
+        href="/adminlte/plugins/fontawesome-free/css/all.min.css" />
+ --}}
+    
+    <!-- overlayScrollbars -->
+    {{-- <link  type="text/css"  rel="stylesheet" 
+        href="{{public_path('/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}" />
+     --}}<!-- Theme style -->
+        <link rel="stylesheet" 
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <style>
+        @page {
+            margin: 0cm 0cm;
+            font-size: 0.6em;
+        }
+        body {
+            margin: 1cm 1cm 1cm;
+        }
+        header {
+            position: fixed;
+            top: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 2cm;
+            background-color: #46C66B;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+        }
+        footer {
+            position: fixed;
+            bottom: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 2cm;
+            background-color: #46C66B;
+            color: white;
+            text-align: center;
+            line-height: 35px;
+        }
+    </style>
+
+  </head>
+<body class="body">
+<div class="wrapper">
+  <!-- Navbar -->
+          
+  <!-- /.navbar -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div >
+     
+               
     <label for="nombreEmpresa">Nombre de la Empresa</label>
                 <input type="text" class="form-control"  
                     id="nombreEmpresa" name="nombreEmpresa" disabled = "disabled" 
                     value="{{$empresa->nombreEmpresa}}">
 
 
-    <br>
-    <div class="container" Style = "font-size:10pt;">
-        <div class="row" >
-            <div class="col" >
+
+      <table class="table table-striped text-left">
+        <tbody>
+          <tr>
+              <td>
                 {{-- INICIO CELDA --}}
-                    <br>
                     
-                   <h2> MATRIZ ESTRATEGIAS </h2>
-
-
-
-
-
-
+                    
+                   <h6> MATRIZ ESTRATEGIAS </h6>
                 {{-- FIN CELDA --}}    
-            </div>
-            <div class="col" >
+              </td>
+              <td>
                  {{-- INICIO CELDA --}}           
                     
                     <table class="table table-bordered">
@@ -47,8 +121,8 @@
                     </table>
 
                 {{-- FIN CELDA --}}    
-            </div>
-            <div class="col" >
+              </td>
+              <td>
                 {{-- INICIO CELDA --}}     
                     <table class="table table-bordered">
                         <thead>
@@ -69,10 +143,11 @@
                     </table>
 
                 {{-- FIN CELDA --}}           
-            </div>
-
-            <div class="w-100"></div>
-            <div class="col" >
+              </td>
+        </tr>
+        <tr>
+           
+              <td>
                 {{-- INICIO CELDA --}}            
                      <table class="table table-bordered">
                         <thead>
@@ -94,16 +169,16 @@
                          
              
                 {{-- FIN CELDA --}}    
-            </div>
-            <div class="col" >
+              </td>
+              <td>
                 {{-- INICIO CELDA --}}            
                     <table class="table table-bordered">
                         <thead>
                             <tr>
           
                             <th scope="col" style = "width: 65%;">Estrategias FO</th>
-                            <th scope="col" style = "width: 65%;">idF</th>
-                            <th scope="col" style = "width: 65%;">idO</th>
+                            <th scope="col" style = "width: 5%;">idF</th>
+                            <th scope="col" style = "width: 5%;">idO</th>
                             
                             </tr>
                         </thead>
@@ -122,16 +197,16 @@
                          
              
                 {{-- FIN CELDA --}}    
-            </div>
-            <div class="col" >
+              </td>
+              <td>
                 {{-- INICIO CELDA --}}            
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                         
                             <th scope="col" style = "width: 65%;">Estrategias DO</th>
-                            <th scope="col" style = "width: 65%;">idD</th>
-                            <th scope="col" style = "width: 65%;">idO</th>
+                            <th scope="col" style = "width: 5%;">idD</th>
+                            <th scope="col" style = "width: 5%;">idO</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -149,9 +224,12 @@
                          
              
                 {{-- FIN CELDA --}}    
-            </div>
-            <div class="w-100"></div>
-            <div class="col" >
+              </td>
+
+         </tr>
+          <tr>
+     
+              <td>
                 {{-- INICIO CELDA --}}            
                      <table class="table table-bordered">
                         <thead>
@@ -174,16 +252,16 @@
                          
              
                 {{-- FIN CELDA --}}    
-            </div>
-            <div class="col" >
+              </td>
+              <td>
                 {{-- INICIO CELDA --}}            
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                         
                             <th scope="col" style = "width: 65%;">Estrategias FA</th>
-                            <th scope="col" style = "width: 65%;">idF</th>
-                            <th scope="col" style = "width: 65%;">idA</th>
+                            <th scope="col" style = "width: 5%;">idF</th>
+                            <th scope="col" style = "width: 5%;">idA</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -201,57 +279,59 @@
                          
              
                 {{-- FIN CELDA --}}    
-            </div>
-            <div class="col" >
-                {{-- INICIO CELDA --}}            
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                       
-                            <th scope="col" style = "width: 65%;">Estrategias DA</th>
-                            <th scope="col" style = "width: 65%;">idD</th>
-                            <th scope="col" style = "width: 65%;">idA</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($estrategiasDA as $itemEstrategia)
+                </td>
+                <td>
+                    {{-- INICIO CELDA --}}            
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>{{$itemEstrategia->descripcion}}</td>
-                                    <td>{{$itemEstrategia->id1}}</td>
-                                    <td>{{$itemEstrategia->id2}}</td>
-                                    
+                          
+                                <th scope="col" style = "width: 65%;">Estrategias DA</th>
+                                <th scope="col" style = "width: 5%;">idD</th>
+                                <th scope="col" style = "width: 5%;">idA</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach($estrategiasDA as $itemEstrategia)
+                                    <tr>
+                                        <td>{{$itemEstrategia->descripcion}}</td>
+                                        <td>{{$itemEstrategia->id1}}</td>
+                                        <td>{{$itemEstrategia->id2}}</td>
+                                        
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
 
-                         
-             
+                </td>         
+             </tr>
                 {{-- FIN CELDA --}}    
             </div>
-            <div class="w-100"></div>
-            <div class="col" style = "text-align: center; position: relative; margin-top: 40px;">
+           
+            
+         
+        <tbody>
+      </table>
 
-                <a href="{{route('empresa.ExportarPDF',$empresa->idEmpresa)}}" class="btn btn-primary btn-lg"> <i class="fas fa-download"></i> Pdf</a>
-                
-            </div>
-            <div class="col" style = "text-align: center; position: relative; margin-top: 40px;">
-                {{-- <a href="www.facebook.com" class="btn btn-primary btn-lg"> 
-                <i class="fas fa-download"></i> Word
-                </a> --}}
-                
+     
 
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
-            </div>
-        </div>
-    </div>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
 
+  <!-- Main Footer -->
 
-@endsection
+</div>
+<!-- ./wrapper -->
 
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
 
-
-
-
-
-{{--  GA GA GA A SODISA DSA JSDJ SDAJJ DSAJDSA JASDJL DSJAJDSAJLKADSJLK DSAJLKDSA DSAJL JLKDSAJLKD SAJKL DSAJLK --}}
+</body>
+</html>

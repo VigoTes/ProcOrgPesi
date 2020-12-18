@@ -1,7 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/bienvenido', function () {
@@ -37,6 +38,8 @@ Route::get ('empresa/{id}/estrategiasDO','EmpresaController@estrategiasDO')->nam
 Route::get ('empresa/{id}/estrategiasDA','EmpresaController@estrategiasDA')->name('empresa.estrategiasDA');
 
 Route::get ('empresa/{id}/descargarPDF','EmpresaController@ExportarPDF')->name('empresa.ExportarPDF');
+Route::get ('empresa/{id}/imprimir','EmpresaController@imprimir')->name('empresa.imprimir');
+
 
 // ************************* RUTAS DE CONFIRMACION  
 Route::get ('empresa/{id}/confirmar','EmpresaController@confirmar')->name('empresa.confirmar');
@@ -50,9 +53,19 @@ Route::get ('estrategia/{id}/cancelar','EstrategiaController@cancelar')->name('e
 
 // RUTA PARA EL LOGIN 
 Route::post('/', 'UserController@login')->name('user.login');
+//Route::post('/', 'UserController@login')->name('login');
+
+
 Route::get('/', function () {
     return view('login');
 });
+
+/* 
+Route::get('/salir', function() {
+    Auth::logout();
+    //Session::flush();
+    return Redirect::to('/');
+})->middleware('auth'); */
 
 
 

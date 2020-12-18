@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Elemento;
 use App\Empresa;
+use App\Estrategia;
 
 class ElementoController extends Controller
 {
@@ -58,11 +59,16 @@ class ElementoController extends Controller
             //obtenemos la cantidad de elementosFODA de ese tipo(F) que tiene la empresa
             $query = Elemento::where('empresa_idEmpresa','=',$request->idEmpresa)
                     ->where('tipo','=',$request->tipoElemento)->get();
-            $cantResultados = count($query);
-
-
-
-            $elemento->nroEnEmpresa = $cantResultados+1;       //le sumamos 1 porque tiene que ser A.I
+            
+            //seleccionamos el idmayor
+            $mayor=0;
+      
+            foreach ($query as $valor)
+                {
+                    if($valor->nroEnEmpresa > $mayor)
+                    $mayor=$valor->nroEnEmpresa;
+                }
+            $elemento->nroEnEmpresa = $mayor+1;       //le sumamos 1 porque tiene que ser A.I
             
             $elemento->save(); /* Guardamos el nuevo registro en la BD */
                 
@@ -129,18 +135,63 @@ class ElementoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) //id del elemento
+    public function destroy($id) //id del elemento a borrar
     {
-        $elemento = Elemento::find($id);
+        $elemento = Elemento::findOrFail($id);
         $idEmpresa = $elemento->empresa_idEmpresa;
-        $elemento->delete();
+        $nroEnEmpresa = $elemento->nroEnEmpresa;
+        //buscamos a las estrategias que contentan a este elemento
+        $query = Estrategia::where('idEmpresa','=',$idEmpresa) //misma empresa
+                    ->where('tipo','like','%'.$elemento->tipoElemento.'%')//que contenga a este TIPO
+                    ->get(); 
 
-       
+        foreach ($query as $valor)
+                {
+                    switch ($elemento->tipo) {
+                        case 'F': //tenemos que buscar en los FO y FA , id1
+                            $cadF = $valor->id1;
+                            $array = explode("&",$cadF);
+                            if(in_array($nroEnEmpresa, $array)) //SI ENCUENTRA ESTE NROEMPRESA en alguna estrategia, reotrna error
+                              return redirect() -> route('empresa.foda',$idEmpresa*(-1));
+                              
+                            
 
-        
-     //   return view('tablas.empresas.edit',compact('empresa','listaObjetivos'));
+                            break;
+                        case 'O':
+                            $cadO = $valor->id2;
+                            $array = explode("&",$cadO);
+                            if(in_array($nroEnEmpresa, $array)) //SI ENCUENTRA ESTE NROEMPRESA en alguna estrategia, reotrna error
+                              return redirect() -> route('empresa.foda',$idEmpresa*(-1));
+                            
 
-        return redirect() -> route('empresa.foda',$idEmpresa)->with('msjLlegada','Registro Creado!!');
+
+                            break;
+                        case 'D':
+                            $cadD = $valor->id1;
+                            $array = explode("&",$cadD);
+                            if(in_array($nroEnEmpresa, $array)) //SI ENCUENTRA ESTE NROEMPRESA en alguna estrategia, reotrna error
+                              return redirect() -> route('empresa.foda',$idEmpresa*(-1));
+                            
+
+
+                            break;
+                        case 'A':
+                            $cadA = $valor->id2;
+                            $array = explode("&",$cadA);
+                            if(in_array($nroEnEmpresa, $array)) //SI ENCUENTRA ESTE NROEMPRESA en alguna estrategia, reotrna error
+                              return redirect() -> route('empresa.foda',$idEmpresa*(-1));
+                                
+                        
+                            break;     
+
+                    }
+
+                }
+                    
+
+
+                    $elemento->delete();
+        return redirect() -> route('empresa.foda',$idEmpresa)->with('msjLlegada','Registro Eliminado.');
 
 
     }

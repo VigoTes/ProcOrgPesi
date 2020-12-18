@@ -4,6 +4,16 @@
 @section('contenido')
 
 <h1> FODA PANEL </h1>
+      @if (session('msjLlegada'))
+        <div class ="alert alert-warning alert-dismissible fade show mt-3" role ="alert">
+            {{session('msjLlegada')}}
+          <button type = "button" class ="close" data-dismiss="alert" aria-label="close">
+              <span aria-hidden="true"> &times;</span>
+          </button>
+          
+        </div>
+      @ENDIF
+
 
     <label for="nombreEmpresa">Nombre de la Empresa</label>
                 <input type="text" class="form-control"  
