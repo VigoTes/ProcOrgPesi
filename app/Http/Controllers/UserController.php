@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -29,11 +30,13 @@ class UserController extends Controller
                         // Preguntamos si es admin o no
                     if($name=='admin')
                     {
-                        return view('bienvenido');
+                        if(Auth::attempt($request->only('name','password'))) //este attempt es para que el Auth se inicie
+                            return view('bienvenido');
                     }//si es user normal
                     else{
-
-                        
+                        if(Auth::attempt($request->only('name','password')))
+                        return redirect()->route('empresa.index','0');
+    
                     }
                     
                 

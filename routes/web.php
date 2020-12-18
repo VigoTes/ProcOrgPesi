@@ -36,6 +36,7 @@ Route::get ('empresa/{id}/estrategiasFA','EmpresaController@estrategiasFA')->nam
 Route::get ('empresa/{id}/estrategiasDO','EmpresaController@estrategiasDO')->name('empresa.estrategiasDO');
 Route::get ('empresa/{id}/estrategiasDA','EmpresaController@estrategiasDA')->name('empresa.estrategiasDA');
 
+Route::get ('empresa/{id}/descargarPDF','EmpresaController@ExportarPDF')->name('empresa.ExportarPDF');
 
 // ************************* RUTAS DE CONFIRMACION  
 Route::get ('empresa/{id}/confirmar','EmpresaController@confirmar')->name('empresa.confirmar');
@@ -58,3 +59,5 @@ Route::get('/', function () {
 Route::get('cancelar', function () {
     return redirect()->route('empresa.index')->with('datos','Accion cancelada');
 })->name('cancelar');
+
+

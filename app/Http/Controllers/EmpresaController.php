@@ -7,6 +7,8 @@ use App\Empresa;
 use App\Objetivo;
 use App\Elemento;
 use App\Estrategia;
+use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class EmpresaController extends Controller
 {
@@ -17,6 +19,7 @@ class EmpresaController extends Controller
         $buscarpor = $Request->buscarpor;
         $empresa = Empresa::where('estadoAct','=','1')
             ->where('nombreEmpresa','like','%'.$buscarpor.'%')
+            ->where('idUsuario','=',Auth::id())
             ->paginate($this::PAGINATION);
         $empresaFocus = new Empresa();
         $empresaFocus->nombreEmpresa = 'Ninguna';
@@ -38,6 +41,7 @@ class EmpresaController extends Controller
         $buscarpor = $Request->buscarpor;
         $empresa = Empresa::where('estadoAct','=','1')
             ->where('nombreEmpresa','like','%'.$buscarpor.'%')
+            ->where('idUsuario','=',Auth::id())
             ->paginate($this::PAGINATION);
         $empresaFocus = Empresa::findOrFail($id);
 
@@ -52,12 +56,14 @@ class EmpresaController extends Controller
 
     public function create()
     {
-        $empresa = new Empresa();
-        print($empresa->mision);
+
+        $empresaFocus = new Empresa();
+        $empresa=$empresaFocus;
+        $empresaFocus->nombreEmpresa = 'Ninguna';
+        $empresaFocus->idEmpresa = 0;
 
 
-
-        return view('tablas.empresas.create',compact('empresa'));
+        return view('tablas.empresas.create',compact('empresa','empresaFocus'));
     }
 
     public function store(Request $request)
@@ -110,8 +116,7 @@ class EmpresaController extends Controller
             $empresa->direccion=$request->direccion;
             $empresa->RUC=$request->RUC;
             $empresa->estadoAct='1';
-            
-            
+            $empresa->idUsuario = Auth::user()->id;
                           
             $empresa->save(); /* Guardamos el nuevo registro en la BD */
                 
@@ -356,5 +361,16 @@ class EmpresaController extends Controller
 
 
     }
+
+ /*    public function ExportarPDF($id){
+        //COMANDO PARA EL COMPLEMENTO PARA PDF
+        //composer require barryvdh/laravel-dompdf
+        //COMPOSER: es un gestor para dependencias de laravel en la nube (se guarda en vendor)
+           $pdf = PDF::loadView(
+            redirect()->route('matriz','id')
+                             )->setPaper('a4', 'landscape');
+        return $pdf->download('MatrizFODA.pdf');
+    }
+  */
 
 }

@@ -232,11 +232,11 @@
             <div class="w-100"></div>
             <div class="col" style = "text-align: center; position: relative; margin-top: 40px;">
 
-                <button type="button" class="btn btn-primary btn-lg"> <i class="fas fa-download"></i> Pdf</button>
+                <a href="" class="btn btn-primary btn-lg"> <i class="fas fa-download"></i> Pdf</a>
                 
             </div>
             <div class="col" style = "text-align: center; position: relative; margin-top: 40px;">
-                <button type="button" class="btn btn-primary btn-lg"> <i class="fas fa-download"></i> Word</button>
+                <a href="www.facebook.com" class="btn btn-primary btn-lg"> <i class="fas fa-download"></i> Word</a>
                 
 
 
