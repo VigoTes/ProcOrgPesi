@@ -221,6 +221,58 @@ class EmpresaController extends Controller
             
         return view('tablas.estrategias.FO',compact('empresa','fortalezas','oportunidades','estrategiasFO'));    
     }
+
+    public function estrategiasFA($id){
+        // DESPLIEGA LA VISTA DE ESTRATEGIAS HACIENDO SELECTS DE LA BD 
+        $empresa = Empresa::findOrFail($id); 
+
+
+        $fortalezas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','F')->get();
+        $amenazas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','A')->get();
+
+        $estrategiasFA = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','FA')->get();
+
+
+        return view('tablas.estrategias.FA',compact('empresa','fortalezas','amenazas','estrategiasFA'));    
+    }
+    
+    public function estrategiasDO($id){
+        // DESPLIEGA LA VISTA DE ESTRATEGIAS HACIENDO SELECTS DE LA BD 
+        $empresa = Empresa::findOrFail($id); 
+
+
+        $debilidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','D')->get();
+        $oportunidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','O')->get();
+
+        $estrategiasDO = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','DO')->get();
+
+
+        return view('tablas.estrategias.DO',compact('empresa','debilidades','oportunidades','estrategiasDO'));    
+    }
+    
+    public function estrategiasDA($id){
+        // DESPLIEGA LA VISTA DE ESTRATEGIAS HACIENDO SELECTS DE LA BD 
+        $empresa = Empresa::findOrFail($id); 
+
+
+        $debilidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','D')->get();
+        $amenazas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','A')->get();
+
+        $estrategiasDA = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','DA')->get();
+
+
+        return view('tablas.estrategias.DA',compact('empresa','debilidades','amenazas','estrategiasDA'));    
+    }
+    
     
 
 }

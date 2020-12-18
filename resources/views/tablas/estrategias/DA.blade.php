@@ -10,7 +10,7 @@
                     id="nombreEmpresa" name="nombreEmpresa" disabled = "disabled" value="{{$empresa->nombreEmpresa}}">
    
     {{-- INPUT INVISIBLE PARA GUARDAR EL TIPO DE ESTRATEGIA --}}   
-          <input type="hidden" id="tipoEstrategia" name="tipoEstrategia" value ="FO">
+          <input type="hidden" id="tipoEstrategia" name="tipoEstrategia" value ="DA">
      {{-- INPUT INVISIBLE PARA GUARDAR EL id de la empresa --}}   
           <input type="hidden" id="idEmpresa" name="idEmpresa" value ="{{$empresa->idEmpresa}}">
                             
@@ -24,22 +24,22 @@
                         <thead>
                             <tr>
                             <th scope="col" style = "width: 10%;">id</th>
-                            <th scope="col" style = "width: 88%;">Fortalezas</th>
+                            <th scope="col" style = "width: 88%;">Debilidades</th>
                             <th scope="col" style = "width: 1%;">X</th>
 
                             
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($fortalezas as $itemFortaleza )
+                            @foreach($debilidades as $itemDebilidad )
                                 
                             <tr>
-                                <td>{{$itemFortaleza->nroEnEmpresa}}</td>
-                                <td>{{$itemFortaleza->descripcion}}</td>
+                                <td>{{$itemDebilidad->nroEnEmpresa}}</td>
+                                <td>{{$itemDebilidad->descripcion}}</td>
                                 <td> 
                                     <div class="form-check">
-                                        <input name="CB_F<?php echo($itemFortaleza->nroEnEmpresa) ?>"
-                                                 id="CB_F<?php echo($itemFortaleza->nroEnEmpresa) ?>"  class="form-check-input" type="checkbox" value="">
+                                        <input name="CB_F<?php echo($itemDebilidad->nroEnEmpresa) ?>"
+                                                 id="CB_F<?php echo($itemDebilidad->nroEnEmpresa) ?>"  class="form-check-input" type="checkbox" value="">
                                     </div>
                                 </td>
                             </tr>
@@ -65,22 +65,22 @@
                         <thead>
                             <tr>
                                 <th scope="col" style = "width: 10%;">id</th>
-                                <th scope="col" style = "width: 88%;">Oportunidades</th>
+                                <th scope="col" style = "width: 88%;">Amenazas</th>
                                 <th scope="col" style = "width: 1%;">X</th> 
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($oportunidades as $itemOportunidad )
+                            @foreach($amenazas as $itemAmenaza )
                                 
                             <tr>
-                                <td>{{$itemOportunidad->nroEnEmpresa}}</td>
-                                <td>{{$itemOportunidad->descripcion}}</td>
+                                <td>{{$itemAmenaza->nroEnEmpresa}}</td>
+                                <td>{{$itemAmenaza->descripcion}}</td>
                                 <td> 
                                      
 
                                     <div class="form-check">
-                                        <input name="CB_O<?php echo($itemOportunidad->nroEnEmpresa) ?>"
-                                                 id="CB_O<?php echo($itemOportunidad->nroEnEmpresa) ?>"  class="form-check-input" type="checkbox" value="">
+                                        <input name="CB_O<?php echo($itemAmenaza->nroEnEmpresa) ?>"
+                                                 id="CB_O<?php echo($itemAmenaza->nroEnEmpresa) ?>"  class="form-check-input" type="checkbox" value="">
                                     </div>
                                 </td>
                             </tr>
@@ -123,7 +123,7 @@
                  {{-- INICIO CELDA --}}           
 
 
-                    <h1 style= "text-align: center"> Estrategias FO </h1>
+                    <h1 style= "text-align: center"> Estrategias DA </h1>
                     <div class="container">
                         <div class="row">
 
@@ -147,8 +147,8 @@
                             <tr>
                   {{--           <th scope="col" style = "width: 5%;">id</th> --}}
                             <th scope="col" style = "width: 55%;">Estrategias</th>
-                            <th scope="col" style = "width: 5%;">idF</th>
-                            <th scope="col" style = "width: 5%;">idO</th>
+                            <th scope="col" style = "width: 5%;">idD</th>
+                            <th scope="col" style = "width: 5%;">idA</th>
                             <th scope="col" style = "width: 18%;">Opciones</th>
                             
                             
@@ -156,7 +156,7 @@
                         </thead>
                         <tbody>
 
-                            @foreach($estrategiasFO as $itemEstrategia)
+                            @foreach($estrategiasDA as $itemEstrategia)
                             
                             <tr>
                           {{--       <td>{{$itemEstrategia->idEstrategia}}</td> --}}

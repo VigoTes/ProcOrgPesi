@@ -22,7 +22,7 @@
             </div>
             
             <button type="submit" class="btn btn-primary">Grabar</button>
-            <a href="{{route('empresa.estrategiasFO',$estrategia->idEmpresa)}}" class="btn btn-danger"><i class="fas fa-ban"></i>Cancelar</a>
+            <a href="{{route('estrategia.cancelar',$estrategia->idEstrategia)}}" class="btn btn-danger"><i class="fas fa-ban"></i>Cancelar</a>
           </form>
 
 

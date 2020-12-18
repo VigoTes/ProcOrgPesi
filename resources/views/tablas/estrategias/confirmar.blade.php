@@ -18,7 +18,7 @@
                 <i class="fas fa-check-square"></i>
                     Sí
              </button>
-            <a href="{{route('empresa.estrategiasFO',$estrategia->idEmpresa)}}" class="btn btn-primary"><i class="fas fa-times-circle"></i>No</a>
+            <a href="{{route('estrategia.cancelar',$estrategia->idEstrategia)}}" class="btn btn-primary"><i class="fas fa-times-circle"></i>No</a>
 
           </form>
 

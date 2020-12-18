@@ -55,6 +55,9 @@ Route::resource('estrategia', 'EstrategiaController');  // es resource pq trabaj
 Route::get ('empresa/{id}/foda','EmpresaController@foda')->name('empresa.foda');
 
 Route::get ('empresa/{id}/estrategiasFO','EmpresaController@estrategiasFO')->name('empresa.estrategiasFO');
+Route::get ('empresa/{id}/estrategiasFA','EmpresaController@estrategiasFA')->name('empresa.estrategiasFA');
+Route::get ('empresa/{id}/estrategiasDO','EmpresaController@estrategiasDO')->name('empresa.estrategiasDO');
+Route::get ('empresa/{id}/estrategiasDA','EmpresaController@estrategiasDA')->name('empresa.estrategiasDA');
 
 
 Route::get ('empresa/{id}/confirmar','EmpresaController@confirmar')->name('empresa.confirmar');
@@ -64,6 +67,7 @@ Route::get ('objetivo/{id}/confirmar','ObjetivoController@confirmar')->name('obj
 Route::get ('elemento/{id}/confirmar','ElementoController@confirmar')->name('elemento.confirmar');
 Route::get ('estrategia/{id}/confirmar','EstrategiaController@confirmar')->name('estrategia.confirmar');
 
+Route::get ('estrategia/{id}/cancelar','EstrategiaController@cancelar')->name('estrategia.cancelar');
 
 
 Route::post('/', 'UserController@login')->name('user.login');

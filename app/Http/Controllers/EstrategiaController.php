@@ -115,15 +115,15 @@ class EstrategiaController extends Controller
                
                     break;
                 case 'FA':
-                    return redirect()->route('empresa.estrategiasFO',$id);
+                    return redirect()->route('empresa.estrategiasFA',$id);
 
                     break;
                 case 'DO':
-                    return redirect()->route('empresa.estrategiasFO',$id);
+                    return redirect()->route('empresa.estrategiasDO',$id);
 
                     break;
                 case 'DA':
-                    return redirect()->route('empresa.estrategiasFO',$id);
+                    return redirect()->route('empresa.estrategiasDA',$id);
 
                     break;  
             }
@@ -167,11 +167,31 @@ class EstrategiaController extends Controller
         
         $estrategia = Estrategia::findOrFail($id);
         $estrategia->descripcion = $request->descripcion;
-
+        $idEmpresa = $estrategia->idEmpresa;
         $estrategia->save();
+        $tipoX = $estrategia->tipo;
 
-        return redirect()->route('empresa.estrategiasFO',$estrategia->idEmpresa);
 
+        switch ($tipoX) {
+            case "FO":
+
+                return redirect()->route('empresa.estrategiasFO',$idEmpresa);
+
+               
+                break;
+            case 'FA':
+                return redirect()->route('empresa.estrategiasFA',$idEmpresa);
+
+                break;
+            case 'DO':
+                return redirect()->route('empresa.estrategiasDO',$idEmpresa);
+
+                break;
+            case 'DA':
+                return redirect()->route('empresa.estrategiasDA',$idEmpresa);
+
+                break;  
+        }
 
     }
 
@@ -205,13 +225,16 @@ class EstrategiaController extends Controller
                
                 break;
             case 'FA':
-                
+                return redirect()->route('empresa.estrategiasFA',$idEmpresa);
+
                 break;
             case 'DO':
-                
+                return redirect()->route('empresa.estrategiasDO',$idEmpresa);
+
                 break;
             case 'DA':
-                
+                return redirect()->route('empresa.estrategiasDA',$idEmpresa);
+
                 break;  
         }
         
@@ -224,5 +247,27 @@ class EstrategiaController extends Controller
         return view('tablas.estrategias.confirmar',compact('estrategia'));
     }
 
+
+    // ME RETORNA A LA VISTA DE ESTRATEGIA FO FA DO DA EN LA QUE ESTABA
+    public function cancelar($id){ // id de la estrategia
+
+        $estrategia = Estrategia::findOrFail($id);
+        $tipoX= $estrategia->tipo;
+        $idEmpresa = $estrategia->idEmpresa;
+        switch ($tipoX) {
+            case "FO":
+                return redirect()->route('empresa.estrategiasFO',$idEmpresa);
+                break;
+            case 'FA':
+                return redirect()->route('empresa.estrategiasFA',$idEmpresa);
+                break;
+            case 'DO':
+                return redirect()->route('empresa.estrategiasDO',$idEmpresa);
+                break;
+            case 'DA':
+                return redirect()->route('empresa.estrategiasDA',$idEmpresa);
+                break;  
+        }
+    }
 
 }
