@@ -12,26 +12,9 @@ Route::get('/bienvenido', function () {
 
 
 
-Route::get('/matriz', function () {
-    return view('tablas.matriz.index');
-});
 
 
-Route::get('/estrategiasFO', function () {
-    return view('tablas.estrategias.FO');
-});
 
-Route::get('/estrategiasFA', function () {
-    return view('tablas.estrategias.FA');
-});
-
-Route::get('/estrategiasDO', function () {
-    return view('tablas.estrategias.DO');
-});
-
-Route::get('/estrategiasDA', function () {
-    return view('tablas.estrategias.DA');
-});
 
 
 
@@ -53,6 +36,8 @@ Route::resource('estrategia', 'EstrategiaController');  // es resource pq trabaj
 
 
 Route::get ('empresa/{id}/foda','EmpresaController@foda')->name('empresa.foda');
+Route::get ('empresa/{id}/matriz','EmpresaController@matriz')->name('empresa.matriz');
+
 
 Route::get ('empresa/{id}/estrategiasFO','EmpresaController@estrategiasFO')->name('empresa.estrategiasFO');
 Route::get ('empresa/{id}/estrategiasFA','EmpresaController@estrategiasFA')->name('empresa.estrategiasFA');

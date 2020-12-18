@@ -273,6 +273,36 @@ class EmpresaController extends Controller
         return view('tablas.estrategias.DA',compact('empresa','debilidades','amenazas','estrategiasDA'));    
     }
     
+    public function matriz($id){ // le pasamos el id de la empresa
+        $empresa = Empresa::findOrFail($id);
+
+        $fortalezas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','F')->get();
+        $debilidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','D')->get();
+        $oportunidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','O')->get();
+        $amenazas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','A')->get();
+
+
+        $estrategiasFO = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','FO')->get();
+        $estrategiasFA = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','FA')->get();
+        $estrategiasDO = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','DO')->get();
+        $estrategiasDA = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','DA')->get();
+
+        return view('tablas.matriz.index',
+            compact('empresa',
+            'fortalezas','debilidades','oportunidades','amenazas',
+            'estrategiasFO','estrategiasFA','estrategiasDO','estrategiasDA'
+            ));    
     
+
+
+    }
 
 }

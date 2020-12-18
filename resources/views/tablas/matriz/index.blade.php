@@ -6,7 +6,8 @@
 
     <label for="nombreEmpresa">Nombre de la Empresa</label>
                 <input type="text" class="form-control"  
-                    id="nombreEmpresa" name="nombreEmpresa" disabled = "disabled" value="HOLAAA AQUI VA EL NOMBRE">
+                    id="nombreEmpresa" name="nombreEmpresa" disabled = "disabled" 
+                    value="{{$empresa->nombreEmpresa}}">
 
 
     <br>
@@ -36,10 +37,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                            </tr>
+                            @foreach($fortalezas as $itemFortalezas)
+                                <tr>
+                                    <td>{{$itemFortalezas->idElemento}}</td>
+                                    <td>{{$itemFortalezas->descripcion}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -55,10 +58,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                            </tr>
+
+                            @foreach($debilidades as $itemDebilidades)
+                                <tr>
+                                    <td>{{$itemDebilidades->idElemento}}</td>
+                                    <td>{{$itemDebilidades->descripcion}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -76,10 +82,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                            </tr>
+                            @foreach($oportunidades as $itemOportunidades)
+                                <tr>
+                                    <td>{{$itemOportunidades->idElemento}}</td>
+                                    <td>{{$itemOportunidades->descripcion}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>   
 
@@ -92,7 +100,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                            <th scope="col" style = "width: 10%;">id</th>
+          
                             <th scope="col" style = "width: 65%;">Estrategias FO</th>
                             <th scope="col" style = "width: 65%;">idF</th>
                             <th scope="col" style = "width: 65%;">idO</th>
@@ -100,14 +108,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>1,5,6</td>
-                                <td>4,1,2</td>
-
-                                
-                            </tr>
+                            @foreach($estrategiasFO as $itemEstrategia)
+                                <tr>
+                                    <td>{{$itemEstrategia->descripcion}}</td>
+                                    <td>{{$itemEstrategia->id1}}</td>
+                                    <td>{{$itemEstrategia->id2}}</td>
+                                    
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -120,19 +128,21 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                            <th scope="col" style = "width: 10%;">id</th>
+                        
                             <th scope="col" style = "width: 65%;">Estrategias DO</th>
                             <th scope="col" style = "width: 65%;">idD</th>
                             <th scope="col" style = "width: 65%;">idO</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>1,5,6</td>
-                                <td>4,1,2</td>
-                            </tr>
+                            @foreach($estrategiasDO as $itemEstrategia)
+                                <tr>
+                                    <td>{{$itemEstrategia->descripcion}}</td>
+                                    <td>{{$itemEstrategia->id1}}</td>
+                                    <td>{{$itemEstrategia->id2}}</td>
+                                    
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -152,10 +162,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                            </tr>
+                            @foreach($amenazas as $itemAmenazas)
+                                <tr>
+                                    <td>{{$itemAmenazas->idElemento}}</td>
+                                    <td>{{$itemAmenazas->descripcion}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>   
 
@@ -168,19 +180,21 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                            <th scope="col" style = "width: 10%;">id</th>
+                        
                             <th scope="col" style = "width: 65%;">Estrategias FA</th>
                             <th scope="col" style = "width: 65%;">idF</th>
                             <th scope="col" style = "width: 65%;">idA</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>1,5,6</td>
-                                <td>4,1,2</td>
-                            </tr>
+                            @foreach($estrategiasFA as $itemEstrategia)
+                                <tr>
+                                    <td>{{$itemEstrategia->descripcion}}</td>
+                                    <td>{{$itemEstrategia->id1}}</td>
+                                    <td>{{$itemEstrategia->id2}}</td>
+                                    
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -193,19 +207,21 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                            <th scope="col" style = "width: 10%;">id</th>
+                       
                             <th scope="col" style = "width: 65%;">Estrategias DA</th>
                             <th scope="col" style = "width: 65%;">idD</th>
                             <th scope="col" style = "width: 65%;">idA</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>1,5,6</td>
-                                <td>4,1,2</td>
-                            </tr>
+                            @foreach($estrategiasDA as $itemEstrategia)
+                                <tr>
+                                    <td>{{$itemEstrategia->descripcion}}</td>
+                                    <td>{{$itemEstrategia->id1}}</td>
+                                    <td>{{$itemEstrategia->id2}}</td>
+                                    
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
