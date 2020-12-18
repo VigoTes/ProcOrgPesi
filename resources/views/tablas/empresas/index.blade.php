@@ -72,6 +72,19 @@
                             <i class="fas fa-trash-alt"> </i> 
                             Eliminar
                         </a>
+
+                        <a href="{{route('empresa.foda',$itemEmpresa->idEmpresa)}}" class = "btn btn-danger"> 
+                            <i class="fas fa-trash-alt"> </i> 
+                            FODA
+                        </a>
+
+                        <a href="{{route('empresa.estrategiasFO',$itemEmpresa->idEmpresa)}}" class = "btn btn-danger"> 
+                            <i class="fas fa-trash-alt"> </i> 
+                            EstrFO
+                        </a>
+
+                        
+                        
                     </td>
 
                 </tr>

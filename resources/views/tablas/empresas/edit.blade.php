@@ -32,8 +32,7 @@
                 <label for="mision">Misión</label>
                 <div class="input-group">
                     <textarea class="form-control @error('mision') is-invalid @enderror"
-                        style = "resize: none;"  id="mision" name="mision" value=''>{{$empresa->mision}}
-                    </textarea>
+                        style = "resize: none;"  id="mision" name="mision" value=''>{{$empresa->mision}}</textarea>
                     @error('mision')
                             <span class = "invalid-feedback" role ="alert">
                                 <strong>{{ $message }} </strong>
@@ -47,8 +46,7 @@
                 <label for="vision">Vision</label>
                 <div class="input-group">
                     <textarea class="form-control @error('vision') is-invalid @enderror" 
-                    style = "resize: none;"  id="vision" name="vision" >{{$empresa->vision}}
-                    </textarea>
+                    style = "resize: none;"  id="vision" name="vision" >{{$empresa->vision}}</textarea>
                     @error('vision')
                             <span class = "invalid-feedback" role ="alert">
                                 <strong>{{ $message }} </strong>
@@ -76,8 +74,7 @@
                 <div class="input-group">
                     
                     <textarea class="form-control @error('factorDif') is-invalid @enderror" aria-label="With textarea"
-                     style = "resize: none;" id="factorDif" name="factorDif"  >{{$empresa->factorDif}}
-                     </textarea>
+                     style = "resize: none;" id="factorDif" name="factorDif"  >{{$empresa->factorDif}}</textarea>
                      @error('factorDif')
                         <span class = "invalid-feedback" role ="alert">
                             <strong>{{ $message }} </strong>
@@ -90,8 +87,7 @@
                 <label for="propuestaV">Propuesta de valor</label>
                 <div class="input-group">
                     <textarea class="form-control @error('propuestaV') is-invalid @enderror"
-                         style = "resize: none;" id="propuestaV" name="propuestaV" >{{$empresa->propuestaV}}
-                         </textarea>
+                         style = "resize: none;" id="propuestaV" name="propuestaV" >{{$empresa->propuestaV}}</textarea>
                     @error('propuestaV')
                         <span class = "invalid-feedback" role ="alert">
                             <strong>{{ $message }} </strong>
@@ -122,6 +118,67 @@
                 {{-- FIN CONTENIDO COLUMNA --}}
             </div>
             <div class="w-100"></div>
+
+            <div class="col"> 
+                 {{-- CONTENIDO COLUMNA --}}
+                
+                <div style=         "float: right;">    
+
+                <br>
+                 <button type="submit" class="btn btn-primary">   <i class="fas fa-save"> </i> Grabar </button>
+                    <a href = "{{route('empresa.index')}}" class = "btn btn-danger">
+                        <i class="fas fa-ban"> </i> Cancelar </a>   {{-- BOTON CANCELARRRRRRRRRRRRRRRRR --}}
+                </div>
+
+                 {{-- FIN CONTENIDO COLUMNA--}}
+            </div>
+        </div>
+    </div>
+   </div>
+
+</form> {{-- FORM GRUP --}}
+
+
+
+
+
+
+
+
+
+
+
+{{-- SEGUNDA SEPARACION AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form method = "POST" action = "{{route('objetivo.store')}}"  >
+    @csrf   
+
+  <div class="form-group">
+
+   <div class="container">  {{-- Container  --}}
+        <div class="row">
+        
             <div class="col"> 
                  {{-- CONTENIDO COLUMNA --}}
                 <br>
@@ -130,18 +187,29 @@
                 <br>
                     <div class="container">
                         <div class="row">
-
+                            
+                             {{-- INPUT INVISIBLE PARA GUARDAR EL VALOR DE LA ID EMPRESA --}}   
+                            <input type="hidden" class="form-control" 
+                                        id="idEmpresaa" name="idEmpresaa" value = {{$empresa->idEmpresa}}>
+                            
                             <div class="col">
+                            {{-- ESTE ES EL INPUTO DEL QUE QUIERO AGARRAR SU VALOR --}}
                                 <input type="text" class="form-control @error('objEstrX') is-invalid @enderror" 
                                         id="objEstrX" name="objEstrX" >
-                   
+                                    @error('objEstrX')
+                                        <span class = "invalid-feedback" role ="alert">
+                                            <strong>{{ $message }} </strong>
+                                        </span>
+                                    @enderror  
+
+
                             </div>
 
                             <div class="col">
-                                <a href="" class = "btn btn-primary"> 
-                                    <i class="fas fa-plus"> </i> 
-                                    Nuevo Registro
-                                </a>
+                                <button type="submit" class="btn btn-primary">  
+                                           <i class="fas fa-plus"> </i>  Nuevo Registro 
+                                    </button>
+                                
                             </div>
                             
                         </div>
@@ -158,30 +226,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
 
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td> <a href="" class = "btn btn-warning">  
+                        {{-- LISTADO DE LOS OBJETIVOS DE LA EMPRESA --}}
+                        @foreach($listaObjetivos as $itemObjetivo)
+
+                            <tr>
+                                <td>{{$itemObjetivo->idObjetivoEst}}</td>
+                                <td>{{$itemObjetivo->descripcionObj}}</td>
+
+                                <td> <a href="{{route('objetivo.edit',$itemObjetivo->idObjetivoEst)}}" class = "btn btn-warning">  
                                         <i class="fas fa-edit"> </i> 
                                         Editar
                                     </a>
 
-                                    <a href="" class = "btn btn-danger"> 
+                                    <a href="{{route('objetivo.confirmar',$itemObjetivo->idObjetivoEst)}}" class = "btn btn-danger"> 
                                         <i class="fas fa-trash-alt"> </i> 
                                         Eliminar
                                     </a>   
                                 </td>
                             </tr>
-                         
+                         @endforeach
                         </tbody>
                     </table>
-                <div style=         "float: right;">    
-
-                 <button type="submit" class="btn btn-primary">   <i class="fas fa-save"> </i> Grabar </button>
-                    <a href = "{{route('empresa.index')}}" class = "btn btn-danger">
-                        <i class="fas fa-ban"> </i> Cancelar </a>   {{-- BOTON CANCELARRRRRRRRRRRRRRRRR --}}
-                </div>
+                
 
                  {{-- FIN CONTENIDO COLUMNA--}}
             </div>

@@ -8,7 +8,7 @@ class Usuario extends Model
 {
 
 
-    protected $table = "users";
+    protected $table = "usuario";
     protected $primaryKey = "id";
     public $timestamps = false;  //para que no trabaje con los campos fecha 
 

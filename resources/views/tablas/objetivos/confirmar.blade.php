@@ -2,21 +2,21 @@
 @section('contenido')
 
     <div class="container">
-        <h1>¿Desea eliminar el siguiente registro?</h1> 
+        <h1>¿Desea eliminar el siguiente Objetivo Estrategico?</h1> 
         
         <h3>
-        idEmpresa : {{ $empresa->idEmpresa }} - Nombre de la Empresa  {{ $empresa->descripcion }}  </h3>
+        idObjetivo : {{ $objetivo->idObjetivoEst }} - Descripcion  {{ $objetivo->descripcionObj }}  </h3>
                                     {{-- nombre de la ruta,         atributo --}}
-        <form method="POST" action="{{route('elemento.destroy',$empresa->idEmpresa)}}">
+        <form method="POST" action="{{route('objetivo.destroy',$objetivo->idObjetivoEst)}}">
             @method('delete')
             @csrf
-            
+        
 
             <button type="submit" class="btn btn-danger">
                 <i class="fas fa-check-square"></i>
                     Sí
              </button>
-            <a href="" class="btn btn-primary"><i class="fas fa-times-circle"></i>No</a>
+            <a href="{{route('empresa.edit',$objetivo->empresa_idEmpresa)}}" class="btn btn-primary"><i class="fas fa-times-circle"></i>No</a>
 
           </form>
 

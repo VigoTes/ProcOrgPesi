@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Empresa;
+use App\Objetivo;
+use App\Elemento;
+use App\Estrategia;
 
 class EmpresaController extends Controller
 {
@@ -28,6 +31,8 @@ class EmpresaController extends Controller
     {
         $empresa = new Empresa();
         print($empresa->mision);
+
+
 
         return view('tablas.empresas.create',compact('empresa'));
     }
@@ -101,9 +106,10 @@ class EmpresaController extends Controller
     {
         
         $empresa=Empresa::findOrFail($id);
+        $listaObjetivos=Objetivo::where('empresa_idEmpresa','=',$id)->get();
+        
 
-
-        return view('tablas.empresas.edit',compact('empresa'));
+        return view('tablas.empresas.edit',compact('empresa','listaObjetivos'));
 
 
     }
@@ -174,5 +180,47 @@ class EmpresaController extends Controller
         $empresa = Empresa::findOrFail($id); 
         return view('tablas.empresas.confirmar',compact('empresa'));
     }
+
+    /* FUNCION PARA REDIRIGIRNOS A LA MATRIZ FODA DE ESTA EMPRESA
+        MANDANDOLE COMO PARAMETRO LA EMPRESA
+    */
+    public function foda($id){
+            // DESPLIEGA LA VISTA DE FODA HACIENDO SELECTS DE LA BD 
+        $empresa = Empresa::findOrFail($id); 
+        
+        
+        $fortalezas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','F')->get();
+        $debilidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','D')->get();
+        $oportunidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','O')->get();
+        $amenazas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','A')->get();
+
+       // return redirect()->route('empresa.foda',$id)->with('msjLlegada','Registro nuevo guardado');
+               
+        return view('tablas.foda.index',compact('empresa','fortalezas','debilidades','oportunidades','amenazas'));
+        
+    }
+    
+
+
+    public function estrategiasFO($id){
+        // DESPLIEGA LA VISTA DE ESTRATEGIAS HACIENDO SELECTS DE LA BD 
+        $empresa = Empresa::findOrFail($id); 
+        $fortalezas = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','F')->get();
+        $oportunidades = Elemento::where('empresa_idEmpresa','=',$id)
+        ->where('tipo','=','O')->get();
+
+        $estrategiasFO = Estrategia::where('idEmpresa','=',$id)
+        ->where('tipo','=','FO')->get();
+
+    // return redirect()->route('empresa.foda',$id)->with('msjLlegada','Registro nuevo guardado');
+            
+        return view('tablas.estrategias.FO',compact('empresa','fortalezas','oportunidades','estrategiasFO'));    
+    }
+    
 
 }

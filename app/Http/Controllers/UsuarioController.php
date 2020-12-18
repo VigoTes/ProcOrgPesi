@@ -79,6 +79,7 @@ class UsuarioController extends Controller
 
 
             $usuario->password= Hash::make($request->password);
+            
             $usuario->apellidos=$request->apellidos;
             $usuario->nombres=$request->nombres;
             $usuario->DNI=$request->DNI;
@@ -171,7 +172,7 @@ class UsuarioController extends Controller
         $usuario = Usuario::findOrFail($id);
         $usuario->estadoAct = '0';
         $usuario->save ();
-        return redirect() -> route('user.index')->with('msjLlegada','Registro eliminado!!');
+        return redirect() -> route('user.index')->with('msj','Registro eliminado');
 
 
 

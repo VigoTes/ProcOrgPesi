@@ -123,58 +123,11 @@
             <div class="w-100"></div>
             <div class="col"> 
                  {{-- CONTENIDO COLUMNA --}}
-                <br>
                 
-                <label for="descripcion">Objetivos Estratégicos</label>
-                <br>
-                    <div class="container">
-                        <div class="row">
-
-                            <div class="col">
-                                <input type="text" class="form-control @error('objEstrX') is-invalid @enderror" 
-                                        id="objEstrX" name="objEstrX" >
-                   
-                            </div>
-
-                            <div class="col">
-                                <a href="" class = "btn btn-primary"> 
-                                    <i class="fas fa-plus"> </i> 
-                                    Nuevo Registro
-                                </a>
-                            </div>
-                            
-                        </div>
-                    </div>
+                  
 
                 <br>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                            <th scope="col" style = "width: 2%">id</th>
-                            <th scope="col" style = "width: 65%">Descripción Objetivo</th>
-                            <th scope="col" style = "width: 20%">Opciones</th>
-                            
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td> <a href="" class = "btn btn-warning">  
-                                        <i class="fas fa-edit"> </i> 
-                                        Editar
-                                    </a>
-
-                                    <a href="" class = "btn btn-danger"> 
-                                        <i class="fas fa-trash-alt"> </i> 
-                                        Eliminar
-                                    </a>   
-                                </td>
-                            </tr>
-                         
-                        </tbody>
-                    </table>
+                    
                 <div style=         "float: right;">    
 
                  <button type="submit" class="btn btn-primary">   <i class="fas fa-save"> </i> Grabar </button>

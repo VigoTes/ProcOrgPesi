@@ -1,13 +1,19 @@
 
 
-@extends('layout.plantilla')
+@extends('layout.plantillaUser')
 @section('contenido')
 
-
-    <label for="nombreEmpresa">Nombre de la Empresa</label>
+<form method = "POST" action = "{{route('estrategia.store')}}"  >
+    @csrf   
+    <label for="nombreEmpresa">Nombre de la empresa:</label>
                 <input type="text" class="form-control"  
-                    id="nombreEmpresa" name="nombreEmpresa" disabled = "disabled" value="HOLAAA AQUI VA EL NOMBRE">
-
+                    id="nombreEmpresa" name="nombreEmpresa" disabled = "disabled" value="{{$empresa->nombreEmpresa}}">
+   
+    {{-- INPUT INVISIBLE PARA GUARDAR EL TIPO DE ESTRATEGIA --}}   
+          <input type="hidden" id="tipoEstrategia" name="tipoEstrategia" value ="FO">
+     {{-- INPUT INVISIBLE PARA GUARDAR EL id de la empresa --}}   
+          <input type="hidden" id="idEmpresa" name="idEmpresa" value ="{{$empresa->idEmpresa}}">
+                            
 
     <br>
     <div class="container" Style = "font-size:10pt;">
@@ -18,46 +24,67 @@
                         <thead>
                             <tr>
                             <th scope="col" style = "width: 10%;">id</th>
-                            <th scope="col" style = "width: 88%;">Debilidades</th>
+                            <th scope="col" style = "width: 88%;">Fortalezas</th>
                             <th scope="col" style = "width: 1%;">X</th>
 
                             
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($fortalezas as $itemFortaleza )
+                                
                             <tr>
-                                <td>1</td>
-                                <td>Mark</td>
+                                <td>{{$itemFortaleza->nroEnEmpresa}}</td>
+                                <td>{{$itemFortaleza->descripcion}}</td>
                                 <td> 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                        <input name="CB_F<?php echo($itemFortaleza->nroEnEmpresa) ?>"
+                                                 id="CB_F<?php echo($itemFortaleza->nroEnEmpresa) ?>"  class="form-check-input" type="checkbox" value="">
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
+
+
                         </tbody>
                     </table>
-             
+
+
+
+
+
+        {{-- SEPARACION TABLAS     SEPARACION TABLAS     SEPARACION TABLAS     SEPARACION TABLAS     SEPARACION TABLAS     SEPARACION TABLAS     SEPARACION TABLAS     --}}
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                            <th scope="col" style = "width: 10%;">id</th>
-                            <th scope="col" style = "width: 88%;">Oportunidades</th>
-                            <th scope="col" style = "width: 1%;">X</th>
-
-                            
-                            
+                                <th scope="col" style = "width: 10%;">id</th>
+                                <th scope="col" style = "width: 88%;">Oportunidades</th>
+                                <th scope="col" style = "width: 1%;">X</th> 
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($oportunidades as $itemOportunidad )
+                                
                             <tr>
-                                <td>1</td>
-                                <td>Mark</td>
+                                <td>{{$itemOportunidad->nroEnEmpresa}}</td>
+                                <td>{{$itemOportunidad->descripcion}}</td>
                                 <td> 
+                                     
+
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                        <input name="CB_O<?php echo($itemOportunidad->nroEnEmpresa) ?>"
+                                                 id="CB_O<?php echo($itemOportunidad->nroEnEmpresa) ?>"  class="form-check-input" type="checkbox" value="">
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -67,26 +94,50 @@
 
                 {{-- FIN CELDA --}}    
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        {{--  SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR SEPARADOR --}}
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
             <div class="col" >
                  {{-- INICIO CELDA --}}           
 
 
-                    <h1 style= "text-align: center"> Estrategias DO </h1>
+                    <h1 style= "text-align: center"> Estrategias FO </h1>
                     <div class="container">
                         <div class="row">
 
                             <div class="col">
                                 <input type="text" class="form-control @error('descripcion') is-invalid @enderror" 
-                                   id="objEstrX" name="objEstrX" style="position: relative; left: 30px; width: 325px;">
-                   
+                                   id="descripcion" name="descripcion" style="position: relative; width: 335px;">
+                                
                             </div>
 
                             
-                                <a href="" class = "btn btn-primary"> 
-                                    <i class="fas fa-plus"> </i> 
-                                    Agregar
-                                </a>
-                            
+                                <button type="submit" class="btn btn-primary">  
+                                           <i class="fas fa-plus"> </i>  Agregar 
+                                </button>
+                                
                             
                         </div>
                     </div>    
@@ -94,9 +145,9 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                            <th scope="col" style = "width: 5%;">id</th>
+                  {{--           <th scope="col" style = "width: 5%;">id</th> --}}
                             <th scope="col" style = "width: 55%;">Estrategias</th>
-                            <th scope="col" style = "width: 5%;">idD</th>
+                            <th scope="col" style = "width: 5%;">idF</th>
                             <th scope="col" style = "width: 5%;">idO</th>
                             <th scope="col" style = "width: 18%;">Opciones</th>
                             
@@ -104,17 +155,20 @@
                             </tr>
                         </thead>
                         <tbody>
+
+                            @foreach($estrategiasFO as $itemEstrategia)
+                            
                             <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>1,4,6</td>
-                                <td>2,3</td>
+                          {{--       <td>{{$itemEstrategia->idEstrategia}}</td> --}}
+                                <td>{{$itemEstrategia->descripcion}}</td>
+                                <td>{{$itemEstrategia->id1}}</td>
+                                <td>{{$itemEstrategia->id2}}</td>
                                 <td>
-                                       <a href="" class = "btn btn-warning btn-sm">  
+                                       <a href="{{route('estrategia.edit',$itemEstrategia->idEstrategia)}}" class = "btn btn-warning btn-sm">  
                                             <i class="fas fa-edit fa-sm"> </i> 
                                         </a>
 
-                                        <a href="" class = "btn btn-danger btn-sm"> 
+                                        <a href="{{route('estrategia.confirmar',$itemEstrategia->idEstrategia)}}" class = "btn btn-danger btn-sm"> 
                                             <i class="fas fa-trash-alt fa-sm"> </i> 
                                         </a>   
                                 
@@ -122,6 +176,8 @@
                                 
 
                             </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
 
@@ -135,5 +191,5 @@
         </div>
     </div>
 
-
+</form>
 @endsection

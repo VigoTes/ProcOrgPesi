@@ -15,7 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-
+    protected $table = "usuario";
     public $timestamps = false;  //para que no trabaje con los campos fecha 
 
 
