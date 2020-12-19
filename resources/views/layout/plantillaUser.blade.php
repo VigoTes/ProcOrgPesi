@@ -72,7 +72,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{url('/salir')}}" class="brand-link">
+    <a href="{{url('/')}}" class="brand-link">
       <i class="fas fa-sign-out-alt"></i>
       <span class="brand-text font-weight-light">Cerrar Sesión</span>
     </a>

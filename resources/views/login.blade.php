@@ -18,7 +18,7 @@
           {{--   <img src="{{asset('/img/visa.png')}}" alt="Sistema de Ventas & ABC"> --}}
             <p>
             <H3>
-            Sistema de gestión de información institucional y matriz FODA
+            Sistema Web Soporte para matriz FODA
             </h3>
             </p>
         </div>
