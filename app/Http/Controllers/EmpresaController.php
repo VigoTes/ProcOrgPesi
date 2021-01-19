@@ -7,6 +7,8 @@ use App\Empresa;
 use App\Objetivo;
 use App\Elemento;
 use App\Estrategia;
+use App\Usuario;
+
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -18,11 +20,19 @@ class EmpresaController extends Controller
 
     public function index(Request $Request)
     {
+        $usuario = Usuario::findOrFail(Auth::id());
+        $empresa = $usuario->empresasDelUsuario();
+        
         $buscarpor = $Request->buscarpor;
+        /* 
+     
         $empresa = Empresa::where('estadoAct','=','1')
             ->where('nombreEmpresa','like','%'.$buscarpor.'%')
-            ->where('idUsuario','=',Auth::id())
-            ->paginate($this::PAGINATION);
+            //->where('id','=',Auth::id())
+            ->paginate($this::PAGINATION); 
+        */
+
+
         $empresaFocus = new Empresa();
         $empresaFocus->nombreEmpresa = 'Ninguna';
         $empresaFocus->idEmpresa = 0;
@@ -41,10 +51,15 @@ class EmpresaController extends Controller
     public function listar(Request $Request, $id) //MTODO PROBANDO BORRAR SI QUIERES
     {
         $buscarpor = $Request->buscarpor;
+
+        $usuario = Usuario::findOrFail(Auth::id());
+        $empresa = $usuario->empresasDelUsuario();
+        /* 
         $empresa = Empresa::where('estadoAct','=','1')
             ->where('nombreEmpresa','like','%'.$buscarpor.'%')
             ->where('idUsuario','=',Auth::id())
             ->paginate($this::PAGINATION);
+         */
         $empresaFocus = Empresa::findOrFail($id);
 
         //cuando vaya al index me retorne a la vista
@@ -118,7 +133,7 @@ class EmpresaController extends Controller
             $empresa->direccion=$request->direccion;
             $empresa->RUC=$request->RUC;
             $empresa->estadoAct='1';
-            $empresa->idUsuario = Auth::user()->id;
+          //  $empresa->idUsuario = Auth::user()->id;
                           
             $empresa->save(); /* Guardamos el nuevo registro en la BD */
                 

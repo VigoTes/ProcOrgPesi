@@ -116,6 +116,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          
           <li class="nav-item menu">    {{-- AQUI FALTARIA LA SELECCION --}}
             <a href="{{route('empresa.index')}}" class="nav-link">
               <i class="fas fa-briefcase"></i>
@@ -124,7 +125,10 @@
               </p>
             </a>
           </li>
-          <li class="nav-item menu">    {{-- AQUI FALTARIA LA SELECCION --}}
+          
+            {{-- ESTE ES UN MODELO QUE GUARDO PARA MANDAR LA VARIABLE EMPRESA  --}}
+          {{-- 
+          <li class="nav-item menu">    
             <a href="{{route('empresa.edit',$empresaFocus->idEmpresa)}}" class="nav-link">
               <i class="fas fa-briefcase"></i>
               <p>
@@ -132,58 +136,26 @@
               </p>
             </a>
           </li>
-
+ --}}
 
           <li class="nav-item">{{-- AQUI VA LA RUTA  --}}
             <a href="{{route('empresa.foda',$empresaFocus->idEmpresa)}}" class="nav-link">
               <i class="fas fa-users"></i>
               <p>
-                FODA
+                Procesos
               </p>
             </a>
           </li>
 
-          <li class="nav-item menu-open">
-              <a href="" class="nav-link">
-                <i class="fas fa-list-alt"></i>
-                <p>
-                  Estrategias
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-
-              <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="{{route('empresa.estrategiasFO',$empresaFocus->idEmpresa)}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>FO</p>
-                      </a>
-                    </li>
-
-                    <li class="nav-item">
-                      <a href="{{route('empresa.estrategiasFA',$empresaFocus->idEmpresa)}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>FA</p>
-                      </a>
-                    </li>
-
-                    <li class="nav-item">
-                      <a href="{{route('empresa.estrategiasDO',$empresaFocus->idEmpresa)}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>DO</p>
-                      </a>
-                    </li>
-
-                    <li class="nav-item">
-                      <a href="{{route('empresa.estrategiasDA',$empresaFocus->idEmpresa)}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>DA</p>
-                      </a>
-                    </li>
-                    
-
-              </ul>
+          <li class="nav-item">{{-- AQUI VA LA RUTA  --}}
+            <a href="{{route('empresa.foda',$empresaFocus->idEmpresa)}}" class="nav-link">
+              <i class="fas fa-users"></i>
+              <p>
+                Areas
+              </p>
+            </a>
           </li>
+
           <li class="nav-item">{{-- AQUI VA LA RUTA  --}}
             <a href="{{route('empresa.matriz',$empresaFocus->idEmpresa)}}" class="nav-link">
               <i class="fas fa-users"></i>
@@ -193,7 +165,16 @@
             </a>
           </li>
 
+          <li class="nav-item">{{-- AQUI VA LA RUTA  --}}
+            <a href="{{route('empresa.matriz',$empresaFocus->idEmpresa)}}" class="nav-link">
+              <i class="fas fa-users"></i>
+              <p>
+                Historial
+              </p>
+            </a>
+          </li>
 
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

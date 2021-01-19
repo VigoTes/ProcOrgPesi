@@ -100,4 +100,114 @@
 
 
 
+
+
+
+
+
+
+
+
+
+{{-- SEGUNDA SEPARACION AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{--                             {{route('usuario.storeEmpresas',$idUsuario)}}                            --}}
+
+<form method = "POST" action = "{{route('usuarios.updateEmpresas',$usuario->id)}}"  >
+    @csrf   
+
+  <div class="form-group">
+
+   <div class="container">  {{-- Container  --}}
+        <div class="row">
+        
+            <div class="col"> 
+                 {{-- CONTENIDO COLUMNA --}}
+                <br>
+                
+                <label for="descripcion">Lista de empresas asignadas</label>
+                <br>
+                    <div class="container">
+                        <div class="row">
+                            
+                             {{-- INPUT INVISIBLE PARA GUARDAR EL VALOR DE LA ID EMPRESA --}}   
+                            <input type="hidden" class="form-control" 
+                                        id="idUsuario" name="idUsuario" value = {{$usuario->id}}>
+
+                        </div>
+                    </div>
+
+                <br>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                            <th scope="col" style = "width: 2%">id</th>
+                            <th scope="col" style = "width: 65%">Nombre Empresa</th>
+                            <th scope="col" style = "width: 20%">Gestiona</th>
+                   
+                            
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        {{-- LISTADO DE LOS OBJETIVOS DE LA EMPRESA --}}
+                        @foreach($listaEmpresas as $itemEmpresa)
+
+                            <tr>
+                                <td>{{$itemEmpresa->idEmpresa}}</td>
+                                <td>{{$itemEmpresa->nombreEmpresa}}</td>
+
+                                <td>
+                                    <div class="form-check">
+                                        <input name="CB_<?php echo($itemEmpresa->idEmpresa) ?>"
+                                             id="CB_<?php echo($itemEmpresa->idEmpresa) ?>"  class="form-check-input" 
+                                             type="checkbox" <?php echo($itemEmpresa->pertenece)?>  value="">
+                                    </div>
+                                    
+                                </td>
+
+                                
+                            </tr>
+                         @endforeach
+                        </tbody>
+                    </table>
+                
+
+                 {{-- FIN CONTENIDO COLUMNA--}}
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="col">
+            <div style=         "float: right;">    
+
+                <button type="submit" class="btn btn-primary">   <i class="fas fa-save"> </i> Grabar </button>
+                   <a href = "{{route('user.index')}}" class = "btn btn-danger">
+                       <i class="fas fa-ban"> </i> Cancelar </a>   {{-- BOTON CANCELARRRRRRRRRRRRRRRRR --}}
+               </div>
+            </div>
+        </div>
+    </div>
+   </div>
+
+</form> {{-- FORM GRUP --}}
+
+
+
 @endsection

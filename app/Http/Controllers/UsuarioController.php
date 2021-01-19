@@ -92,6 +92,22 @@ class UsuarioController extends Controller
 
     }
 
+    public function updateEmpresas(Request $request,$idUsuario){
+
+        $cadena = "";
+        for($i=0;$i<100;$i++)
+        {
+            if(isset($_POST['CB_'.$i]))
+            $cadena = $cadena.$i.'&';
+        }
+        $cadena = trim($cadena, '&');
+        $vector = explode('&', $cadena);
+ 
+        return $vector;
+        return view('tablas.usuarios.edit',compact('usuario','listaEmpresas','vector'));
+
+    }
+
     /**
      * Display the specified resource.
      *
@@ -112,8 +128,9 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         $usuario=Usuario::findOrFail($id);
-        return view('tablas.usuarios.edit',compact('usuario'));
+        $listaEmpresas = $usuario->empresasTodasParaEdicion($id);
 
+        return view('tablas.usuarios.edit',compact('usuario','listaEmpresas'));
 
     }
 

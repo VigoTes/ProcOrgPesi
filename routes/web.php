@@ -51,6 +51,9 @@ Route::get ('estrategia/{id}/confirmar','EstrategiaController@confirmar')->name(
 // RUTA DE CANCELACION PERSONALIZADA (TE RETORNA A LA VISTA DE ESTRATEGIA EN LA QUE ESTABAS FA FO DO DA)
 Route::get ('estrategia/{id}/cancelar','EstrategiaController@cancelar')->name('estrategia.cancelar');
 
+Route::post ('usuarios/{id}/updateEmpresas','UsuarioController@updateEmpresas')->name('usuarios.updateEmpresas');
+
+
 // RUTA PARA EL LOGIN 
 Route::post('/', 'UserController@login')->name('user.login');
 //Route::post('/', 'UserController@login')->name('login');
