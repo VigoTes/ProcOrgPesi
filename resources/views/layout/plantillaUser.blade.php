@@ -139,7 +139,7 @@
  --}}
 
           <li class="nav-item">{{-- AQUI VA LA RUTA  --}}
-            <a href="{{route('empresa.foda',$empresaFocus->idEmpresa)}}" class="nav-link">
+            <a href="{{route('proceso.listar',$empresaFocus->idEmpresa)}}" class="nav-link">
               <i class="fas fa-users"></i>
               <p>
                 Procesos
@@ -148,7 +148,7 @@
           </li>
 
           <li class="nav-item">{{-- AQUI VA LA RUTA  --}}
-            <a href="{{route('empresa.foda',$empresaFocus->idEmpresa)}}" class="nav-link">
+            <a href="{{route('area.listar',$empresaFocus->idEmpresa)}}" class="nav-link">
               <i class="fas fa-users"></i>
               <p>
                 Areas

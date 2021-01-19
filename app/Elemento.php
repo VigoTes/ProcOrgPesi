@@ -14,5 +14,8 @@ class Elemento extends Model
         // le indicamos los campos de la tabla 
         protected $fillable = ['tipo','descripcion','nroEnEmpresa','empresa_idEmpresa'];
 
-
+    public function cliente(){
+            return $this->hasOne('App\Empresa','codcliente','codcliente');
+    
+    }
 }

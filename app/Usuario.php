@@ -24,21 +24,20 @@ class Usuario extends Model
        // return $listaEmpresass;
 
        $listaFinalEmpresas = DB::select("
-            SELECT  
+       SELECT  
                 E.idEmpresa,
                 E.nombreEmpresa,
                 E.RUC,
-                E.direccion,
-                E.mision,
-                E.vision,
-                E.factorDif,
-                E.propuestaV,
-                E.estadoAct,
+                E.direccion,E.mision,E.vision,E.factorDif,E.propuestaV,E.estadoAct,
+                
                 IF ( $this->id = EU.idUsuario, 'checked','') as 'pertenece'
                     FROM empresa as E
-            LEFT JOIN empresausuario as EU on E.idEmpresa = EU.idEmpresa
-        ");
-
+            LEFT JOIN 
+            (SELECT * from empresausuario where idUsuario = $this->id) 
+                as EU on E.idEmpresa = EU.idEmpresa
+        "); //el left join es pq solo quiero que me agarre la totalidad de los elementos de Empresa
+        //                                              (tienen que aparecer todas las empresas, pero solo una vez)
+        // entonces solo hago el join con las relaciones que puedan haber con ESTE usuario, esto par que no se repitan las empresas en mi busqueda
         
         
 

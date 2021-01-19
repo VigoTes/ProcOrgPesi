@@ -23,11 +23,23 @@ Route::resource('empresa', 'EmpresaController');  // es resource pq trabajamos c
 Route::resource('objetivo', 'ObjetivoController');  // es resource pq trabajamos con varias rutas
 Route::resource('elemento', 'ElementoController');  // es resource pq trabajamos con varias rutas
 Route::resource('estrategia', 'EstrategiaController');  // es resource pq trabajamos con varias rutas
+Route::resource('proceso', 'ProcesoController');  // es resource pq trabajamos con varias rutas
+Route::resource('subproceso', 'SubprocesoController');  // es resource pq trabajamos con varias rutas
+Route::resource('area', 'AreaController');  // es resource pq trabajamos con varias rutas
+Route::resource('puesto', 'PuestoController');  // es resource pq trabajamos con varias rutas
 
 /* ************************** RUTAS ADICIONALES  ********************* */
 
 
 Route::get ('empresa/{id}/listar','EmpresaController@listar')->name('empresa.listar');
+
+//                    idEmpresa
+
+Route::get ('proceso/{id}/listar','ProcesoController@listar')->name('proceso.listar');
+Route::get ('proceso/{id}/crear','ProcesoController@crear')->name('proceso.crear');
+
+Route::get ('area/{id}/listar','AreaController@listar')->name('area.listar');
+Route::get ('area/{id}/crear','AreaController@crear')->name('area.crear');
 
 
 Route::get ('empresa/{id}/foda','EmpresaController@foda')->name('empresa.foda');
@@ -47,6 +59,11 @@ Route::get ('usuarios/{id}/confirmar','UsuarioController@confirmar')->name('usua
 Route::get ('objetivo/{id}/confirmar','ObjetivoController@confirmar')->name('objetivo.confirmar');
 Route::get ('elemento/{id}/confirmar','ElementoController@confirmar')->name('elemento.confirmar');
 Route::get ('estrategia/{id}/confirmar','EstrategiaController@confirmar')->name('estrategia.confirmar');
+Route::get ('proceso/{id}/confirmar','ProcesoController@confirmar')->name('proceso.confirmar');
+Route::get ('subproceso/{id}/confirmar','SubprocesoController@confirmar')->name('subproceso.confirmar');
+Route::get ('area/{id}/confirmar','AreaController@confirmar')->name('area.confirmar');
+Route::get ('puesto/{id}/confirmar','PuestoController@confirmar')->name('puesto.confirmar');
+
 
 // RUTA DE CANCELACION PERSONALIZADA (TE RETORNA A LA VISTA DE ESTRATEGIA EN LA QUE ESTABAS FA FO DO DA)
 Route::get ('estrategia/{id}/cancelar','EstrategiaController@cancelar')->name('estrategia.cancelar');

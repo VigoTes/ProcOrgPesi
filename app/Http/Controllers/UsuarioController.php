@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Usuario;
+use App\EmpresaUsuario;
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 
@@ -94,17 +97,52 @@ class UsuarioController extends Controller
 
     public function updateEmpresas(Request $request,$idUsuario){
 
+        $ningunaEmpresaSeleccionada=false;
+
         $cadena = "";
         for($i=0;$i<100;$i++)
         {
             if(isset($_POST['CB_'.$i]))
             $cadena = $cadena.$i.'&';
         }
+
+        $vector = explode('&', $cadena);
+        if(count($vector)==1) //activamos una bandera si es que no se seleccionó ninguna empresa para que sea gestionada por el user
+            $ningunaEmpresaSeleccionada=true;
+
+        //ahora si construimos el vector de verdad
         $cadena = trim($cadena, '&');
         $vector = explode('&', $cadena);
- 
-        return $vector;
-        return view('tablas.usuarios.edit',compact('usuario','listaEmpresas','vector'));
+       
+       /*ahora tenemos que borrar de la tabla EmpresaUsuarios todas las apariciones de
+         este usuario, pues lo vamos a reescribir
+        */
+        DB::delete("delete from empresausuario where idUsuario = $idUsuario");
+   
+   
+        //en vector están almacenados los nuevos ids de las empresas asignadas a este user
+        error_log('*******REPORTE***********
+        
+        Contenido de vector: 
+        '.implode(",",$vector).'
+        
+        
+        tamaño de  $vector='.count($vector));
+
+
+        //si no se seleccionó ninguna empresa, no tenemos que insertar registros en empresausuario
+        if(!$ningunaEmpresaSeleccionada)
+            foreach ($vector as $idEmpresa) {
+                error_log('*************** RECORRIENDO $vector'.$idEmpresa);
+                $nuevaRelacionEmpresaUsuario = new EmpresaUsuario();
+                $nuevaRelacionEmpresaUsuario->idUsuario = $idUsuario;
+                $nuevaRelacionEmpresaUsuario->idEmpresa = $idEmpresa;
+                $nuevaRelacionEmpresaUsuario->save();
+            }
+
+      
+        return redirect()->route('usuarios.edit',$idUsuario);
+                
 
     }
 
