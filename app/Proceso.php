@@ -18,5 +18,11 @@ class Proceso extends Model
             return $this->hasOne('App\Empresa','idEmpresa','idEmpresa');
         }
 
+        public function nombre(){
+            return $this->nombreProceso;
+        }
+        public function id(){
+            return $this->idProceso;
+        }
 
 }

@@ -18,4 +18,11 @@ class Puesto extends Model
             return $this->hasOne('App\Area','idArea','idArea');
         }
 
+        public function nombre(){
+            return $this->nombre;
+        }
+        public function id(){
+            return $this->idPuesto;
+        }
+
 }

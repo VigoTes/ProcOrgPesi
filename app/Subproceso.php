@@ -17,5 +17,10 @@ class Subproceso extends Model
         public function proceso(){
             return $this->hasOne('App\Proceso','idProceso','idProceso');
         }
-
+        public function nombre(){
+            return $this->nombre;
+        }
+        public function id(){
+            return $this->idSubproceso;
+        }
 }

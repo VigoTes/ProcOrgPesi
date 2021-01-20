@@ -96,7 +96,7 @@ class UsuarioController extends Controller
     }
 
     public function updateEmpresas(Request $request,$idUsuario){
-
+        
         $ningunaEmpresaSeleccionada=false;
 
         $cadena = "";

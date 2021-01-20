@@ -18,6 +18,11 @@ class Area extends Model
             return $this->hasOne('App\Empresa','idEmpresa','idEmpresa');
         }
 
-
+        public function nombre(){
+            return $this->nombreArea;
+        }
+        public function id(){
+            return $this->idArea;
+        }
 
 }

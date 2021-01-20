@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Empresa extends Model
@@ -13,13 +13,24 @@ class Empresa extends Model
 
         // le indicamos los campos de la tabla 
         protected $fillable = ['nombreEmpresa','ruc','direccion',
-        'mision','vision','factorDif','propuestaV','estadoAct','configuracionMatriz'];
+        'mision','vision','factorDif','propuestaV','estadoAct','tipoDeMatriz'];
 
         /*
-        configuracionMatriz puede tener los valores
-            PxA   Proceso vs Area
-            PxP   Proceso vs Puesto
-            SxA   Subpr vs Area
-            SxP   Subpr vs Puesto
+        tipoDeMatriz puede tener los valores
+          1  PxA   Proceso vs Area
+          2  PxP   Proceso vs Puesto
+          3  SxA   Subpr vs Area
+          4  SxP   Subpr vs Puesto
         */
+
+    
+        public function matricesDeLaEmpresa(){
+          //aqui haremos la union de empresas
+          $listaEmpresass = Matriz::where('idEmpresa','=',$this->idEmpresa  )->get();
+          //aqui ya tenemos la lista de matrices de esta empresa
+
+          return $listaEmpresass;
+      }
+
+
 }

@@ -27,11 +27,15 @@ Route::resource('proceso', 'ProcesoController');  // es resource pq trabajamos c
 Route::resource('subproceso', 'SubprocesoController');  // es resource pq trabajamos con varias rutas
 Route::resource('area', 'AreaController');  // es resource pq trabajamos con varias rutas
 Route::resource('puesto', 'PuestoController');  // es resource pq trabajamos con varias rutas
+Route::resource('celdamatriz', 'CeldaMatrizController');  // es resource pq trabajamos con varias rutas
+Route::resource('matriz', 'MatrizController');  // es resource pq trabajamos con varias rutas
 
 /* ************************** RUTAS ADICIONALES  ********************* */
 
 
 Route::get ('empresa/{id}/listar','EmpresaController@listar')->name('empresa.listar');
+Route::get ('matriz/{id}/listar','MatrizController@listar')->name('matriz.listar');
+Route::get ('matriz/{id}/crear','MatrizController@crear')->name('matriz.crear');
 
 //                    idEmpresa
 
@@ -42,8 +46,11 @@ Route::get ('area/{id}/listar','AreaController@listar')->name('area.listar');
 Route::get ('area/{id}/crear','AreaController@crear')->name('area.crear');
 
 
+
 Route::get ('empresa/{id}/foda','EmpresaController@foda')->name('empresa.foda');
 Route::get ('empresa/{id}/matriz','EmpresaController@matriz')->name('empresa.matriz');
+Route::get ('empresa/{id}/matrizProcOrg','EmpresaController@matrizProcOrg')->name('empresa.matrizProcOrg');
+
 Route::get ('empresa/{id}/estrategiasFO','EmpresaController@estrategiasFO')->name('empresa.estrategiasFO');
 Route::get ('empresa/{id}/estrategiasFA','EmpresaController@estrategiasFA')->name('empresa.estrategiasFA');
 Route::get ('empresa/{id}/estrategiasDO','EmpresaController@estrategiasDO')->name('empresa.estrategiasDO');

@@ -8,6 +8,13 @@ use App\Objetivo;
 use App\Elemento;
 use App\Estrategia;
 use App\Usuario;
+use App\CeldaMatriz;
+use Illuminate\Support\Facades\DB;
+use App\Area;
+use App\Proceso;
+use App\Puesto;
+use App\Subproceso;
+
 
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -284,7 +291,7 @@ class EmpresaController extends Controller
         $estrategiasFO = Estrategia::where('idEmpresa','=',$id)
         ->where('tipo','=','FO')->get();
 
-    // return redirect()->route('empresa.foda',$id)->with('msjLlegada','Registro nuevo guardado');
+        // return redirect()->route('empresa.foda',$id)->with('msjLlegada','Registro nuevo guardado');
             
         return view('tablas.estrategias.FO',compact('empresa','fortalezas','oportunidades','estrategiasFO','empresaFocus'));    
     }
@@ -417,16 +424,7 @@ class EmpresaController extends Controller
 
 
 
-/*         $pdf = PDF::loadView( 
-            view('tablas.matriz.index',
-                compact('empresa',
-                'fortalezas','debilidades','oportunidades','amenazas',
-                'estrategiasFO','estrategiasFA','estrategiasDO','estrategiasDA',
-                'empresaFocus'
-                        )
-                )
-            )->setPaper('a4', 'landscape');
- */
+
 
             $pdf = PDF::loadView( 
                 'tablas.matriz.imprimir',
@@ -489,7 +487,9 @@ class EmpresaController extends Controller
     }
 
     
+    public function matrizProcOrg($id){ //le pasamos id de la empresa
 
+    }
 
 
 
