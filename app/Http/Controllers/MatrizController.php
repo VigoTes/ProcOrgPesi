@@ -34,7 +34,11 @@ class MatrizController extends Controller
     //PARA SELECCIONAR UNA MATRIZ
     public function listar(Request $Request, $id) //id de la empresa
     {
+        if($id==0) //si no ha seleccionado una empresa, lo redirije al index para que escoja una
+            return redirect()->route('empresa.index')->with('msjLlegada','Error: Debe escoger una empresa para editar.');
         
+
+
         $empresa = Empresa::findOrFail($id);
         $listaMatrices = $empresa->matricesDeLaEmpresa();
         //return $listaMatrices;
@@ -212,8 +216,31 @@ class MatrizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id) //mandamos la id de la matriz a borrar
+    {
+        //primero borrramos los elementos de esa matriz 
+        $msjBorrado = DB::select("
+            delete FROM celdamatriz 
+                    WHERE idMatriz=$id
+                ");
+        
+            
+        $matriz = Matriz::findOrFail($id);
+        $idEmpresa = $matriz->idEmpresa;
+        $matriz->delete();
+        
+        return redirect()-route('matriz.listar',$idEmpresa);
+
+    }
+
+
+    public function confirmar($id)
     {
         //
+        $matriz = Matriz::findOrFail($id);
+        $empresaFocus = Empresa::findOrFail($matriz->idEmpresa);
+        return view('tablas.matrizProcOrg.confirmar',compact('matriz','empresaFocus'));
     }
+    
+
 }

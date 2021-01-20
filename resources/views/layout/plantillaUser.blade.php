@@ -166,7 +166,7 @@
           </li>
 
           <li class="nav-item">{{-- AQUI VA LA RUTA  --}}
-            <a href="{{route('empresa.matriz',$empresaFocus->idEmpresa)}}" class="nav-link">
+            <a href="" class="nav-link">
               <i class="fas fa-users"></i>
               <p>
                 Historial

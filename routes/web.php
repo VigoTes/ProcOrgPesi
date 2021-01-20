@@ -70,6 +70,7 @@ Route::get ('proceso/{id}/confirmar','ProcesoController@confirmar')->name('proce
 Route::get ('subproceso/{id}/confirmar','SubprocesoController@confirmar')->name('subproceso.confirmar');
 Route::get ('area/{id}/confirmar','AreaController@confirmar')->name('area.confirmar');
 Route::get ('puesto/{id}/confirmar','PuestoController@confirmar')->name('puesto.confirmar');
+Route::get ('matriz/{id}/confirmar','MatrizController@confirmar')->name('matriz.confirmar');
 
 
 // RUTA DE CANCELACION PERSONALIZADA (TE RETORNA A LA VISTA DE ESTRATEGIA EN LA QUE ESTABAS FA FO DO DA)

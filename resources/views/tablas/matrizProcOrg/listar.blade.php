@@ -92,7 +92,7 @@
                             Editar
                         </a>
 
-                        <a href="" class = "btn btn-danger"> 
+                        <a href="{{route('matriz.confirmar',$itemMatriz->idMatriz)}}" class = "btn btn-danger"> 
                             <i class="fas fa-trash-alt"> </i> 
                             Eliminar
                         </a>

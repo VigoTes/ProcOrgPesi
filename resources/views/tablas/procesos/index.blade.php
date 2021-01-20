@@ -1,7 +1,7 @@
 @extends('layout.plantillaUser')
 @section('contenido')
 
-<h1> Area de gestión de Procesos </h1>
+<h1> Gestión de Procesos </h1>
       @if (session('msjLlegada'))
         <div class ="alert alert-warning alert-dismissible fade show mt-3" role ="alert">
             {{session('msjLlegada')}}

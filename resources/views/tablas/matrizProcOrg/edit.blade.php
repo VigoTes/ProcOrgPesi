@@ -24,10 +24,15 @@
         
         <label>Nro de matriz</label>
         <input type="text" class="form-control"  
-              id="codMatriz" name="codMatriz" disabled = "disabled" 
-              value="{{$matrizAEditar->nroEnEmpresa}}">
-          
-
+            id="codMatriz" name="codMatriz" disabled = "disabled" 
+            value="{{$matrizAEditar->nroEnEmpresa}}">
+            
+        <label>Descripcion de la matriz</label>
+        <input type="text" class="form-control"  
+                id="codMatriz" name="codMatriz" disabled = "disabled" 
+                value="{{$matrizAEditar->descripcion}}">
+            
+                  
                 <input type="hidden"
                     id="idEmpresa" name="idEmpresa" 
                     value="{{$empresaFocus->idEmpresa}}">
