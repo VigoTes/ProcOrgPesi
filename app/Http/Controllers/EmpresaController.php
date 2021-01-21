@@ -11,6 +11,7 @@ use App\Usuario;
 use App\CeldaMatriz;
 use Illuminate\Support\Facades\DB;
 use App\Area;
+use App\EmpresaUsuario;
 use App\Proceso;
 use App\Puesto;
 use App\Subproceso;
@@ -143,7 +144,15 @@ class EmpresaController extends Controller
           //  $empresa->idUsuario = Auth::user()->id;
                           
             $empresa->save(); /* Guardamos el nuevo registro en la BD */
-                
+            
+            $listaEmpresas = Empresa::all();
+            $empresa = $listaEmpresas->last();
+
+            $empresaUsuario = new EmpresaUsuario();
+            $empresaUsuario->idUsuario = Auth::id();
+            $empresaUsuario->idEmpresa = $empresa->idEmpresa;
+            $empresaUsuario->save();
+
             /* Regresamos al index con el mensaje de nuevo registro */
             return redirect()->route('empresa.index')->with('msjLlegada','Registro nuevo guardado');
                 

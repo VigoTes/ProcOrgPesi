@@ -187,41 +187,18 @@ class MatrizController extends Controller
 
         }
 
-
-
-        
-        
         $celdaParaFuncion = new CeldaMatriz(); 
 
         return view('tablas.matrizProcOrg.edit',compact('empresaFocus','listaColumnas','listaFilas','celdaParaFuncion','tipoMatrizEscrita','matrizAEditar'));
-    
-
-
-
-
-
-
         
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id) //mandamos la id de la matriz a borrar
     {
         //primero borrramos los elementos de esa matriz 

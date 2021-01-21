@@ -18,7 +18,7 @@
 
            <a href="{{route('proceso.crear',$empresaFocus->idEmpresa)}}" class = "btn btn-primary"> 
                 <i class="fas fa-plus"> </i> 
-                  Nuevo Registro
+                  Nuevo Proceso
            </a>
 
             <nav class = "navbar float-right"> {{-- PARA MANDARLO A LA DERECHA --}}

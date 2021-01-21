@@ -13,8 +13,8 @@ class Empresa extends Model
 
         // le indicamos los campos de la tabla 
         protected $fillable = ['nombreEmpresa','ruc','direccion',
-        'mision','vision','factorDif','propuestaV','estadoAct','tipoDeMatriz'];
-
+        'mision','vision','factorDif','propuestaV','estadoAct'];
+    
         /*
         tipoDeMatriz puede tener los valores
           1  PxA   Proceso vs Area

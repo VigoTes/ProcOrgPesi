@@ -18,7 +18,7 @@
 
            <a href="{{route('area.crear',$empresaFocus->idEmpresa)}}" class = "btn btn-primary"> 
                 <i class="fas fa-plus"> </i> 
-                  Nuevo Registro
+                  Nueva Area
            </a>
 
             <nav class = "navbar float-right"> {{-- PARA MANDARLO A LA DERECHA --}}
