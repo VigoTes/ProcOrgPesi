@@ -14,6 +14,7 @@ use App\Area;
 use App\Puesto;
 use Illuminate\Support\Facades\Auth;
 use App\CambioEdicion;
+use Illuminate\Support\Facades\DB;
 
 class PuestoController extends Controller
 {
@@ -135,6 +136,18 @@ class PuestoController extends Controller
         $area = Area::findOrFail($idArea);
 
         $puesto->delete();
+
+
+        //para este puesto, debemos borrar las celdas de las matrices que le involucran
+        //Como estamos borrando puestos, buscamos las matrices de esta empresa de tipo 2 y 4
+        DB::select("
+            delete celdamatriz FROM celdamatriz
+            inner join matrizprocorg on matrizprocorg.idMatriz = celdamatriz.idMatriz        
+                WHERE 
+                    idColumna=$id
+                    and idEmpresa =  $area->idEmpresa
+                    and (tipoDeMatriz='2' or tipoDeMatriz='4')
+        ");
 
         //REGISTRO EN EL HISTORIAL
         $historial = new CambioEdicion();

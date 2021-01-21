@@ -24,12 +24,12 @@
         
         <label>Nro de matriz</label>
         <input type="text" class="form-control"  
-            id="codMatriz" name="codMatriz" disabled = "disabled" 
+            id="nroMatrizEnEmpresa" name="nroMatrizEnEmpresa" disabled = "disabled" 
             value="{{$matrizAEditar->nroEnEmpresa}}">
             
         <label>Descripcion de la matriz</label>
         <input type="text" class="form-control"  
-                id="codMatriz" name="codMatriz" disabled = "disabled" 
+                id="descripcionMatriz" name="descripcionMatriz" disabled = "disabled" 
                 value="{{$matrizAEditar->descripcion}}">
             
                   
@@ -43,23 +43,38 @@
     
 
     <div style="margin: 20px ;">
-        <div style="margin-left: 35px;" >
-            <input type="radio" id="MARCA_X" name="tipoMarca" value="X"> X
-        
-            <input type="radio" id="MARCA_x" name="tipoMarca" value="x"> x
-            
-            <input type="radio" id="MARCA_/" name="tipoMarca" value="/"> /
-            <input type="radio" id="MARCA_*" name="tipoMarca" value="*"> Borrar
-        
-           
-        
+        <div style=" width:150px; height: 100px; float: left; margin-left:20px;">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoMarca" id="MARCA_X" value="X">
+                <label class="form-check-label" for="MARCA_X">
+                Marcar con X
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoMarca" id="MARCA_x" value="x">
+                <label class="form-check-label" for="MARCA_x">
+                Marcar con x
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoMarca" id="MARCA_/" value="/">
+                <label class="form-check-label" for="MARCA_/">
+                Marcar con /
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoMarca" id="MARCA_*" value="*">
+                <label class="form-check-label" for="MARCA_*">
+                Eliminar marca
+                </label>
+            </div>
         </div>
-        <button type="submit" style="margin-left: 30px;" class="btn btn-primary">  
-            Marcar 
-        </button>
-        
-        
 
+        <div style="">
+            <button type="submit" style="margin-top: 25px; " class="btn btn-primary">  
+                Marcar 
+            </button>
+        </div>
     </div>
    
     <div class="container" Style = "font-size:10pt;">
@@ -67,9 +82,6 @@
         {{-- 
             TABLA DE PROCESOS/SUBPR VS AREAS/PUESTOS
                         FILAS           COLUMNAS
-
-
-
             --}}
 
         <table class="table table-bordered">
@@ -82,7 +94,7 @@
                     @foreach($listaColumnas as $itemColumna)
                         <th scope="col"> {{$itemColumna->nombre()}}</th>    
                     @endforeach    
-                </tr>
+                </tr>  
 
 
                 <tr>

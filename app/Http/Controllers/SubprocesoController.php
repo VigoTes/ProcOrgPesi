@@ -12,6 +12,8 @@ use App\Proceso;
 use App\Subproceso;
 use App\CambioEdicion;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class SubprocesoController extends Controller
 {
@@ -135,6 +137,23 @@ class SubprocesoController extends Controller
         $proceso = Proceso::findOrFail($subproceso->idProceso);
         $idProceso = $subproceso->idProceso;
         $subproceso->delete();
+
+
+        //para este subproceso, debemos borrar las celdas de las matrices que le involucran
+        //Como estamos borrando subprocesos, buscamos las matrices de esta empresa de tipo 3 y 4
+        DB::select("
+            delete celdamatriz FROM celdamatriz
+            inner join matrizprocorg on matrizprocorg.idMatriz = celdamatriz.idMatriz        
+                WHERE 
+                    idFila=$id
+                    and idEmpresa =  $proceso->idEmpresa
+                    and (tipoDeMatriz='3' or tipoDeMatriz='4')
+        ");
+
+
+
+
+
 
 
         //REGISTRO EN EL HISTORIAL

@@ -11,6 +11,8 @@ use App\Usuario;
 use App\Proceso;
 use App\Subproceso;
 use App\CambioEdicion;
+use Illuminate\Support\Facades\DB;
+
 class ProcesoController extends Controller
 {
     
@@ -182,14 +184,53 @@ class ProcesoController extends Controller
     public function destroy($id)
     {
         $proceso = Proceso::findOrFail($id);
+        $listaSubprocesos = Subproceso::where('idProceso','=',$id)->get();
         $idEmpresa = $proceso->idEmpresa;
         $proceso->delete();
+
+        //si se borra un area deben borrarse sus puestos 
+        DB::select("
+            delete FROM subproceso
+                    WHERE idProceso=$id
+        ");
+
+        
+        //Si se borra un proceso se deben borrar sus apariciones en las matrices
+        //Como estamos borrando processos, buscamos las matrices de esta empresa de tipo 1 y 2
+        //para cada una de estas matrices, borramos las celdas que incluyan la id de esta Area (columnas)
+        DB::select("
+                delete celdamatriz FROM celdamatriz
+                inner join matrizprocorg on matrizprocorg.idMatriz = celdamatriz.idMatriz        
+                    WHERE 
+                        idFila=$id
+                        and idEmpresa =  $idEmpresa
+                        and (tipoDeMatriz='1' or tipoDeMatriz='2')
+
+
+            ");
+
+            // ERROR PARA ARREGLAR CUANDO BORRO UN PROCESO, NO SE BORRAN SUS CELDAS DE SUBPROCESO USADAS
+        foreach ($listaSubprocesos as $itemSub) {
+        //para cada subpr de este proc, debemos borrar las celdas de las matrices que le involucran
+        //Como estamos borrando subprocesos, buscamos las matrices de esta empresa de tipo 3 y 4
+            DB::select("
+                delete celdamatriz FROM celdamatriz
+                inner join matrizprocorg on matrizprocorg.idMatriz = celdamatriz.idMatriz        
+                    WHERE 
+                        idFila=$itemSub->idSubproceso
+                        and idEmpresa =  $idEmpresa
+                        and (tipoDeMatriz='3' or tipoDeMatriz='4')
+
+
+            ");
+        }
+
 
 
         $historial = new CambioEdicion();
         $historial->registrarCambio($proceso->idEmpresa, 
-                "Se eliminó un proceso.",Auth::id(),
-                    "idProcesoEliminado=".$id,
+                "Se eliminó un proceso y sus subprocesos.",Auth::id(),
+                    "idProcesoEliminado=".$id." nombre=".$proceso->nombreProceso,
                     "");
 
         return redirect()->route('proceso.listar',$idEmpresa);

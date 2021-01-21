@@ -13,9 +13,9 @@ use App\Subproceso;
 use App\Area;
 use App\Puesto;
 use App\CambioEdicion;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use App\Matriz;
 
 class AreaController extends Controller
 {
@@ -186,15 +186,50 @@ class AreaController extends Controller
     public function destroy($id)
     {
         $area = Area::findOrFail($id);
+        $listaPuestos = Puesto::where('idArea','=',$id)->get();
         $idEmpresa = $area->idEmpresa;
         $area->delete();
 
+        //si se borra un area deben borrarse sus puestos 
+        DB::select("
+            delete FROM Puesto
+                    WHERE idArea=$id
+        ");
+
+
+        //Si se borra un area se deben borrar sus apariciones en las matrices
+        //Como estamos borrando areas, buscamos las matrices de esta empresa de tipo 1 y 3
+        //para cada una de estas matrices, borramos las celdas que incluyan la id de esta Area (columnas)
+                DB::select("
+                    delete celdamatriz FROM celdamatriz
+                    inner join matrizprocorg on matrizprocorg.idMatriz = celdamatriz.idMatriz        
+                        WHERE 
+                            idColumna=$id
+                            and idEmpresa =  $idEmpresa
+                            and (tipoDeMatriz='1' or tipoDeMatriz='3')
+
+
+                ");
+        foreach ($listaPuestos as $itemPuesto) {
+        //para cada puesto de esta Area, debemos borrar las celdas de las matrices que le involucran
+        //Como estamos borrando puestos, buscamos las matrices de esta empresa de tipo 2 y 4
+                DB::select("
+                    delete celdamatriz FROM celdamatriz
+                    inner join matrizprocorg on matrizprocorg.idMatriz = celdamatriz.idMatriz        
+                        WHERE 
+                            idColumna=$itemPuesto->idPuesto
+                            and idEmpresa =  $idEmpresa
+                            and (tipoDeMatriz='2' or tipoDeMatriz='4')
+
+
+                ");
+        }
 
         
         //REGISTRO EN EL HISTORIAL
         $historial = new CambioEdicion();
-        $historial->registrarCambio($area->idEmpresa, "Se eliminó un area.",Auth::id(),
-                                    "idAreaEliminada=".$area->idArea,"");
+        $historial->registrarCambio($area->idEmpresa, "Se eliminó un area y sus puestos.",Auth::id(),
+                                    "idAreaEliminada=".$area->idArea." nombre=".$area->nombreArea,"");
         
 
         return redirect()->route('area.listar',$idEmpresa);

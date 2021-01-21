@@ -43,7 +43,7 @@
           <table class="table table-striped table-valign-middle">
             <thead>
             <tr>
-              <th>Nro Matriz</th>
+              <th>N° Matriz</th>
               <th>Tipo de Matriz</th>
               <th>Descripcion</th>
               <th>Opciones</th>
@@ -105,7 +105,6 @@
             @endforeach
             
           
-
 
             </tbody>
           </table>

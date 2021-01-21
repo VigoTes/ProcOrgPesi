@@ -13,37 +13,24 @@
       @ENDIF
  
 <div class="card">
-        <div class="card-header border-0">         
-         
-
-
-            {{-- <nav class = "navbar float-right">
+        {{-- <div class="card-header border-0">         
+             <nav class = "navbar float-right">
                 <form class="form-inline my-2 my-lg-0" onsubmit="">
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" aria-label="Search" id="buscarpor" name = "buscarpor" value ="" >
                     <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
-            </nav> --}}
-
-
-          <div class="card-tools">
-            <a href="#" class="btn btn-tool btn-sm">
-          
-            </a>
-            <a href="#" class="btn btn-tool btn-sm">
-       
-            </a>
-          </div>
-        </div>
+            </nav>
+        </div> --}}
         
         <div class="card-body table-responsive p-0">
-          <table class="table table-striped table-valign-middle">
+          <table class="table table-striped table-valign-middle" style="font-size: 10pt">
             <thead>
             <tr>
-              <th>N° Cambio</th>
+              <th>N°</th>
               <th>Fecha</th>
-              <th>Descripcion</th>
-              <th>Usuario responsable</th>
-              <th>Anterior valor </th>
+              <th>Descripción</th>
+              <th>Usuario Responsable</th>
+              <th>Anterior Valor </th>
               <th>Nuevo Valor</th>
               
               

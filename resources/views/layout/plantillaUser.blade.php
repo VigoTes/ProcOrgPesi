@@ -160,7 +160,7 @@
             <a href="{{route('matriz.listar',$empresaFocus->idEmpresa)}}" class="nav-link">
               <i class="fas fa-users"></i>
               <p>
-                Matriz
+                Matrices
               </p>
             </a>
           </li>

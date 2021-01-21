@@ -67,7 +67,8 @@ class CeldaMatrizController extends Controller
         $celdaOcupada=false;
         //buscamos si ya hay un elemento en esa posicion
         $query = CeldaMatriz::where('idFila','=',$idFila)
-            ->where('idColumna','=',$idColumna)->get();
+            ->where('idColumna','=',$idColumna)
+            ->where('idMatriz','=',$idMatriz)->get();
         if(count($query)!=0){
             $celdaOcupada=true;
         }
