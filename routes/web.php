@@ -29,8 +29,12 @@ Route::resource('area', 'AreaController');  // es resource pq trabajamos con var
 Route::resource('puesto', 'PuestoController');  // es resource pq trabajamos con varias rutas
 Route::resource('celdamatriz', 'CeldaMatrizController');  // es resource pq trabajamos con varias rutas
 Route::resource('matriz', 'MatrizController');  // es resource pq trabajamos con varias rutas
+Route::resource('cambioedicion', 'CambioEdicionController');  // es resource pq trabajamos con varias rutas
 
 /* ************************** RUTAS ADICIONALES  ********************* */
+
+
+Route::get ('cambioedicion/{id}/listar','CambioEdicionController@listar')->name('cambioedicion.listar');
 
 
 Route::get ('empresa/{id}/listar','EmpresaController@listar')->name('empresa.listar');

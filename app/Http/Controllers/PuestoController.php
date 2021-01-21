@@ -12,7 +12,8 @@ use App\Proceso;
 use App\Subproceso;
 use App\Area;
 use App\Puesto;
-
+use Illuminate\Support\Facades\Auth;
+use App\CambioEdicion;
 
 class PuestoController extends Controller
 {
@@ -60,12 +61,17 @@ class PuestoController extends Controller
              }
         $puesto->nroEnArea = $mayor+1; 
         //ya tenemos el nroEnEmpresa, podemos guardar el valor
-        error_log('*******REPORTE***********
-        EL NUMERO MAYOR ES : '.$mayor.'
-        ');
+        
 
 
         $puesto->save();
+
+         //REGISTRO EN EL HISTORIAL
+         $historial = new CambioEdicion();
+         $historial->registrarCambio($area->idEmpresa , "Se creó un puesto " ,Auth::id(),
+                                     "nroEnArea=".$puesto->nroEnArea.""
+                                     ,"nombre = ".$puesto->nombre);
+               
 
         //retornamos a la vista de edit area
         return redirect()->route('area.edit', $area->idArea);     
@@ -87,7 +93,8 @@ class PuestoController extends Controller
     {
         $puesto = Puesto::findOrFail($id);
         $area = Area::findOrFail($puesto->idArea);
-            return view('tablas.puestos.edit',compact('puesto','area'));
+        $empresaFocus = Empresa::findOrFail($area->idEmpresa);
+            return view('tablas.puestos.edit',compact('puesto','area','empresaFocus'));
 
 
     }
@@ -102,8 +109,19 @@ class PuestoController extends Controller
     public function update(Request $request, $id)
     {
         $actualizado = Puesto::findOrFail($id); 
+        $area = Area::findOrFail($actualizado->idArea);
+
+        $antValor = $actualizado->nombre;
         $actualizado->nombre =  $request->nombre;
         $actualizado->save();
+
+
+        //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($area->idEmpresa , "Se editó un puesto " ,Auth::id(),
+                                    "nombreAnt=".$antValor
+                                    ,"nombreNuevo = ".$actualizado->nombre);
+         
 
         return redirect()->route('area.edit',$actualizado->idArea);
 
@@ -114,7 +132,16 @@ class PuestoController extends Controller
     {
         $puesto = Puesto::findOrFail($id);
         $idArea = $puesto->idArea;
+        $area = Area::findOrFail($idArea);
+
         $puesto->delete();
+
+        //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($area->idEmpresa , "Se eliminó un puesto " ,Auth::id(),
+                                    "puesto eliminado = ".$puesto->nombre
+                                    ,"");
+         
 
         return redirect()->route('area.edit',$idArea);
 

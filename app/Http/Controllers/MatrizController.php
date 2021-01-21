@@ -15,7 +15,7 @@ use App\Proceso;
 use App\Puesto;
 use App\Subproceso;
 use App\Matriz;
-
+use App\CambioEdicion;
 use Illuminate\Support\Facades\Auth;
 
 class MatrizController extends Controller
@@ -106,6 +106,10 @@ class MatrizController extends Controller
         $nuevaMatriz->idEmpresa = $request->idEmpresaFocus;
         $nuevaMatriz->save();
 
+        //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($nuevaMatriz->idEmpresa , "Se creó una matriz.",Auth::id(),
+                                    "","idMatrizCreada=".$nuevaMatriz->nroEnEmpresa." descripcion=".$nuevaMatriz->descripcion);
 
 
         return redirect()->route('matriz.listar',$request->idEmpresaFocus);
@@ -184,6 +188,8 @@ class MatrizController extends Controller
         }
 
 
+
+        
         
         $celdaParaFuncion = new CeldaMatriz(); 
 
@@ -229,7 +235,14 @@ class MatrizController extends Controller
         $idEmpresa = $matriz->idEmpresa;
         $matriz->delete();
         
-        return redirect()-route('matriz.listar',$idEmpresa);
+        //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($matriz->idEmpresa , "Se borró una matriz.",Auth::id(),
+                                    "idMatrizBorrada=".$id."         descripcion=".$matriz->descripcion,"");
+         
+
+
+        return redirect()->route('matriz.listar',$idEmpresa);
 
     }
 

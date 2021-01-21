@@ -1,4 +1,4 @@
-@extends('layout.plantilla')
+@extends('layout.plantillaUser')
 @section('contenido')
 
     <form method="POST" action="{{route('puesto.update',$puesto->idPuesto)}}">

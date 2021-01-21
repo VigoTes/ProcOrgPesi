@@ -12,7 +12,7 @@ use App\Proceso;
 use App\Subproceso;
 use App\Area;
 use App\Puesto;
-
+use App\CambioEdicion;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -110,6 +110,14 @@ class AreaController extends Controller
 
         $idEmpresa = $empresaFocus->idEmpresa;
         $Request = $request;
+
+        //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($idEmpresa, "Se creó un area.",Auth::id(),
+                    "",$nuevo->nombreArea);
+        
+
+
         return redirect()->route('area.listar',$idEmpresa);
             
    
@@ -151,9 +159,19 @@ class AreaController extends Controller
     public function update(Request $request, $id)
     {
         $area = Area::findOrFail($id);
+        $antValor = $area->nombreArea."  /\  ".$area->descripcionArea ;
+
         $area->nombreArea = $request->nombreArea;
         $area->descripcionArea = $request->descripcionArea;
+
+        $nueValor = $area->nombreArea."  /\  ".$area->descripcionArea ;
         $area->save();
+
+
+        //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($area->idEmpresa, "Se editó un area.",Auth::id(),
+                                    $antValor,$nueValor);
 
         return redirect()->route('area.listar',$area->idEmpresa);
 
@@ -170,6 +188,14 @@ class AreaController extends Controller
         $area = Area::findOrFail($id);
         $idEmpresa = $area->idEmpresa;
         $area->delete();
+
+
+        
+        //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($area->idEmpresa, "Se eliminó un area.",Auth::id(),
+                                    "idAreaEliminada=".$area->idArea,"");
+        
 
         return redirect()->route('area.listar',$idEmpresa);
 

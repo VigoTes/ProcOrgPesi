@@ -10,6 +10,8 @@ use App\Estrategia;
 use App\Usuario;
 use App\Proceso;
 use App\Subproceso;
+use App\CambioEdicion;
+use Illuminate\Support\Facades\Auth;
 
 class SubprocesoController extends Controller
 {
@@ -56,12 +58,15 @@ class SubprocesoController extends Controller
              }
         $subproceso->nroEnProceso = $mayor+1; 
         //ya tenemos el nroEnEmpresa, podemos guardar el valor
-        error_log('*******REPORTE***********
-        EL NUMERO MAYOR ES : '.$mayor.'
-        ');
-
+        
 
         $subproceso->save();
+
+        //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($proceso->idEmpresa , "Se creó un subproceso " ,Auth::id(),"",
+             "nroEnProceso = ".$subproceso->nroEnProceso." nombre = ".$subproceso->nombre);
+              
 
         //retornamos a la vista de edit proceso
         return redirect()->route('proceso.edit', $proceso->idProceso);     
@@ -98,8 +103,20 @@ class SubprocesoController extends Controller
     public function update(Request $request, $id)
     {
         $actualizado = Subproceso::findOrFail($id); 
+        
+        $proceso = Proceso::findOrFail($actualizado->idProceso);
+
+        $anterior = $actualizado->nombre;
         $actualizado->nombre =  $request->nombre;
         $actualizado->save();
+
+
+        //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($proceso->idEmpresa , "Se editó un subproceso " ,
+        Auth::id(),"anteriorNombre = ".$anterior,
+             " nombre = ".$actualizado->nombre);
+          
 
         return redirect()->route('proceso.edit',$actualizado->idProceso);
 
@@ -115,9 +132,18 @@ class SubprocesoController extends Controller
     public function destroy($id)//le pasamos la id del subproceso a borrar
     {
         $subproceso = Subproceso::findOrFail($id);
+        $proceso = Proceso::findOrFail($subproceso->idProceso);
         $idProceso = $subproceso->idProceso;
         $subproceso->delete();
 
+
+        //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($proceso->idEmpresa , "Se eliminó un subproceso " ,
+        Auth::id(), "anteriorNombre = ".$subproceso->nombre,
+             "");
+
+             
         return redirect()->route('proceso.edit',$idProceso);
 
     }

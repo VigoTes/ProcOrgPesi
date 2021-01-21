@@ -10,7 +10,7 @@ use App\Estrategia;
 use App\Usuario;
 use App\Proceso;
 use App\Subproceso;
-
+use App\CambioEdicion;
 class ProcesoController extends Controller
 {
     
@@ -103,10 +103,18 @@ class ProcesoController extends Controller
         $nuevo->save();
 
         $idEmpresa = $empresaFocus->idEmpresa;
-        $Request = $request;
+        
+        //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($idEmpresa, "Se creó un proceso.",Auth::id(),
+                    "",$nuevo->nombreProceso);
+        
+        
+        
+        
         return redirect()->route('proceso.listar',$idEmpresa);
             
-        return view('tablas.procesos.index',compact('proceso','empresaFocus','buscarpor')); 
+        //return view('tablas.procesos.index',compact('proceso','empresaFocus','buscarpor')); 
 
 
     }
@@ -146,9 +154,20 @@ class ProcesoController extends Controller
     public function update(Request $request, $id)
     {
         $proceso = Proceso::findOrFail($id);
+        $antValor = $proceso->nombreProceso." /\ ".$proceso->descripcionProceso;
+
         $proceso->nombreProceso = $request->nombreProceso;
         $proceso->descripcionProceso = $request->descripcionProceso;
+
         $proceso->save();
+
+        $nueValor = $proceso->nombreProceso." /\ ".$proceso->descripcionProceso;
+
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($proceso->idEmpresa, 
+                "Se editó un proceso.",Auth::id(),
+                    $antValor,
+                    $nueValor);
 
         return redirect()->route('proceso.listar',$proceso->idEmpresa);
 
@@ -165,6 +184,13 @@ class ProcesoController extends Controller
         $proceso = Proceso::findOrFail($id);
         $idEmpresa = $proceso->idEmpresa;
         $proceso->delete();
+
+
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($proceso->idEmpresa, 
+                "Se eliminó un proceso.",Auth::id(),
+                    "idProcesoEliminado=".$id,
+                    "");
 
         return redirect()->route('proceso.listar',$idEmpresa);
 

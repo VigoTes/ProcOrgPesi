@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Empresa;
 use App\CeldaMatriz;
-
+use Illuminate\Support\Facades\Auth;
+use App\CambioEdicion;
+use App\Matriz;
 
 class CeldaMatrizController extends Controller
 {
@@ -60,6 +62,8 @@ class CeldaMatrizController extends Controller
         if($tipoDeMarca=="")
             return $this->retornarAMatriz("Error: Debe seleccionar una marca",$request->idMatriz);
 
+        $msjHistorial="";
+
         $celdaOcupada=false;
         //buscamos si ya hay un elemento en esa posicion
         $query = CeldaMatriz::where('idFila','=',$idFila)
@@ -70,6 +74,7 @@ class CeldaMatrizController extends Controller
 
         if($tipoDeMarca=="*")// SI VAMOS A BORRAR UNA MARCA CREADA
         {
+            $msjHistorial="se borró una marca";
             if($celdaOcupada){
                 error_log('Borrando la celda idCelda='.$query[0]->idCelda );
                 try {
@@ -85,7 +90,7 @@ class CeldaMatrizController extends Controller
                 
             }   
         }else{ // SI VAMOS A CREAR UNA NUEVA MARCA
-
+            $msjHistorial="se añadió una marca";
             if($celdaOcupada)
                 return $this->retornarAMatriz("Error: Error: La celda seleccionada está ocupada",
                                                         $request->idMatriz);
@@ -98,9 +103,18 @@ class CeldaMatrizController extends Controller
             $nuevaCelda->contenido=$tipoDeMarca;
             $nuevaCelda->save();
             
+            
 
         }
-        
+
+        $matriz = Matriz::findOrFail($idMatriz);
+
+         //REGISTRO EN EL HISTORIAL
+        $historial = new CambioEdicion();
+        $historial->registrarCambio($empresa->idEmpresa , "Se editó una matriz (".$msjHistorial.")" ,Auth::id(),
+                                    "nroMatrizEmpresa=".$matriz->nroEnEmpresa." idFila=".$idFila." idCol=".$idColumna.""
+                                    ,$tipoDeMarca);
+            
 
         return redirect()->route('matriz.edit',$request->idMatriz);
 
