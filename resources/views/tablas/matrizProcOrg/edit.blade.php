@@ -92,7 +92,9 @@
                     </th>
                     <th scope="col"></th>
                     @foreach($listaColumnas as $itemColumna)
-                        <th scope="col"> {{$itemColumna->nombre()}}</th>    
+                        <th scope="col"> {{$itemColumna->nombre()}}</th>
+                        <input type="hidden" name="nombreC<?php echo($itemColumna->id()) ?>" id="nombreC<?php echo($itemColumna->id()) ?>" value="<?php echo($itemColumna->nombre()) ?>">   
+                            
                     @endforeach    
                 </tr>  
 
@@ -103,7 +105,8 @@
                     @foreach($listaColumnas as $itemColumna)
                         <th scope="col"  style="text-align: center;"> 
                             <input type="radio"  id="RB_C<?php echo($itemColumna->id()) ?>" name="columnas" value="RB_C<?php echo($itemColumna->id()) ?>">
-                          {{--   {{$itemColumna->id()}} --}}
+                          
+                            {{--   {{$itemColumna->id()}} --}}
                         </th>    
                     @endforeach  
 
@@ -116,7 +119,8 @@
                     <td scope="col" style="text-align: center;"> {{$itemFila->nombre()}}</td>
                     <td  style="text-align: center;">   
                         <input type="radio" id="RB_F<?php echo($itemFila->id()) ?>" name="filas" value="RB_F{{$itemFila->id()}}">
-                           {{--  {{$itemFila->id()}} --}}
+                        <input type="hidden" name="nombreF<?php echo($itemFila->id()) ?>" id="nombreF<?php echo($itemFila->id()) ?>" value="<?php echo($itemFila->nombre()) ?>">   
+                        {{--  {{$itemFila->id()}} --}}
                     </td>
                     @foreach($listaColumnas as $itemColumna)
                         <th scope="col" style="text-align: center; font-size: 13pt;"> 

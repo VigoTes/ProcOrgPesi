@@ -50,11 +50,20 @@ class CeldaMatrizController extends Controller
         
         $empresa = Empresa::findOrFail($request->idEmpresa);
         
+        
 
         $idFila = str_replace("RB_F","",$request->filas);
         $idColumna = str_replace("RB_C","",$request->columnas);
         $idMatriz = $request->idMatriz;
         $tipoDeMarca = $request->tipoMarca;
+
+        $nombreIDFila = 'nombreF'.$idFila;
+        $nombreFila = $request->$nombreIDFila;
+        
+        $nombreIDColumna = 'nombreC'.$idColumna;
+        $nombreColumna = $request->$nombreIDColumna;
+        
+        
 
         if($idFila=="" || $idColumna ==""){
             return $this->retornarAMatriz("Error: Debe seleccionar una celda",$request->idMatriz);
@@ -103,18 +112,19 @@ class CeldaMatrizController extends Controller
             $nuevaCelda->idMatriz = $idMatriz;
             $nuevaCelda->contenido=$tipoDeMarca;
             $nuevaCelda->save();
-            
-            
-
         }
 
         $matriz = Matriz::findOrFail($idMatriz);
+
+
+
+
 
          //REGISTRO EN EL HISTORIAL
         $historial = new CambioEdicion();
         $historial->registrarCambio($empresa->idEmpresa , "Se editó una matriz (".$msjHistorial.")" ,Auth::id(),
                                     "nroMatrizEmpresa=".$matriz->nroEnEmpresa." idFila=".$idFila." idCol=".$idColumna.""
-                                    ,$tipoDeMarca);
+                                    ,"Se creó ".$tipoDeMarca." con la fila ".$nombreFila. " y columna ".$nombreColumna  );
             
 
         return redirect()->route('matriz.edit',$request->idMatriz);
