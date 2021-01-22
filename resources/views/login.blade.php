@@ -2,7 +2,7 @@
 <html>
 <head>
 	 <meta charset="utf-8"/>
-     <title>Sistema FODA</title>
+     <title>Sistema Proc vs Org</title>
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta content="width=device-width, initial-scale=1.0" name="viewport"/>      
      <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
@@ -18,7 +18,7 @@
           {{--   <img src="{{asset('/img/visa.png')}}" alt="Sistema de Ventas & ABC"> --}}
             <p>
             <H3>
-            Sistema Web Soporte para matriz FODA
+            Sistema Web Soporte para matriz de Procedimientos Vs Organizacion
             </h3>
             </p>
         </div>

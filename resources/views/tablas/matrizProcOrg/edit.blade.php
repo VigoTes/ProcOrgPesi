@@ -101,9 +101,9 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     @foreach($listaColumnas as $itemColumna)
-                        <th scope="col"> 
-                            <input type="radio" id="RB_C<?php echo($itemColumna->id()) ?>" name="columnas" value="RB_C<?php echo($itemColumna->id()) ?>">
-                            {{$itemColumna->id()}}
+                        <th scope="col"  style="text-align: center;"> 
+                            <input type="radio"  id="RB_C<?php echo($itemColumna->id()) ?>" name="columnas" value="RB_C<?php echo($itemColumna->id()) ?>">
+                          {{--   {{$itemColumna->id()}} --}}
                         </th>    
                     @endforeach  
 
@@ -113,16 +113,20 @@
             <tbody>
                 @foreach($listaFilas as $itemFila)
                 <tr> 
-                    <td scope="col"> {{$itemFila->nombre()}}</td>
-                    <td>   
+                    <td scope="col" style="text-align: center;"> {{$itemFila->nombre()}}</td>
+                    <td  style="text-align: center;">   
                         <input type="radio" id="RB_F<?php echo($itemFila->id()) ?>" name="filas" value="RB_F{{$itemFila->id()}}">
-                            {{$itemFila->id()}}
+                           {{--  {{$itemFila->id()}} --}}
                     </td>
                     @foreach($listaColumnas as $itemColumna)
-                        <th scope="col"> 
+                        <th scope="col" style="text-align: center; font-size: 13pt;"> 
                             <?php 
-                                echo($celdaParaFuncion->getContenido($itemFila->id(),$itemColumna->id(),$matrizAEditar->idMatriz));
-
+                                $contenido = ($celdaParaFuncion->getContenido($itemFila->id(),$itemColumna->id(),$matrizAEditar->idMatriz));
+                                if($contenido=="X")
+                                    echo($contenido);
+                                else 
+                                    echo("<small>".$contenido."</small>");
+                                
                             ?>
                         </th>    
                     @endforeach          
@@ -135,24 +139,21 @@
 
         
         
-        <div class="row" >
+         <div class="row" >
            
             
             <div class="w-100"></div>
             <div class="col" style = "text-align: center; position: relative; margin-top: 40px;">
-
-                <a href="" class="btn btn-primary btn-lg"> <i class="fas fa-download"></i> Pdf</a>
-                
+                <a href="{{route('matriz.verinforme',$matrizAEditar->idMatriz)}}" class = "btn btn-primary"> 
+                    <i class="fas fa-eye"> </i> 
+                    Visualizar Informe
+                  </a>
             </div>
             <div class="col" style = "text-align: center; position: relative; margin-top: 40px;">
-                {{-- <a href="www.facebook.com" class="btn btn-primary btn-lg"> 
-                <i class="fas fa-download"></i> Word
-                </a> --}}
-                
-
-
+ 
             </div>
-        </div>
+        </div> 
+
     </div>
 
 </form>

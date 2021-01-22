@@ -85,7 +85,10 @@
               
                     <td>
 
-
+                        <a href="{{route('matriz.verinforme',$itemMatriz->idMatriz)}}" class = "btn btn-primary"> 
+                          <i class="fas fa-eye"></i> 
+                          
+                        </a>
                             {{-- MODIFICAR RUTAS DE Delete y Edit --}}
                         <a href="{{route('matriz.edit',$itemMatriz->idMatriz)}}" class = "btn btn-warning">  
                             <i class="fas fa-edit"> </i> 
@@ -97,6 +100,8 @@
                             Eliminar
                         </a>
 
+                        
+                        
 
                     </td>
                  

@@ -12,7 +12,10 @@
                     
 
             Nombre:  {{ $puesto->nombre }}  </h3>
-                                    {{-- nombre de la ruta,         atributo --}}
+            Al borrar este puesto también borrará todas sus ocurrencias en las matrices en las que se haya usado.
+            <br>       
+            
+            {{-- nombre de la ruta,         atributo --}}
         <form method="POST" action="{{route('puesto.destroy',$puesto->idPuesto)}}">
             @method('delete')
             @csrf

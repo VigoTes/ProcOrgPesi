@@ -45,7 +45,7 @@ class Usuario extends Model
     }
 
 
-    public function empresasDelUsuario(){
+    public function empresasDelUsuario($buscarpor){
         //aqui haremos la union de empresas
         $listaEmpresass = EmpresaUsuario::where('idEmpresa','=',$this->id  )->get();
         //aqui ya tenemos la lista de empresas de ese usuario, pero solo con sus ids
@@ -63,7 +63,7 @@ class Usuario extends Model
         //hacemos la busqueda de todas las empresas existentes
         $listaFinalEmpresas = DB::table('empresa as E')
         ->join('empresausuario as EU','E.idEmpresa','=','EU.idEmpresa')                 
-        ->where('EU.idUsuario','=',$this->id)
+        ->where('EU.idUsuario','=',$this->id)->where('nombreEmpresa','like','%'.$buscarpor.'%')
         ->select('E.idEmpresa','E.nombreEmpresa','E.RUC','E.direccion','E.mision',
                     'E.vision','E.factorDif','E.propuestaV','E.estadoAct')
         

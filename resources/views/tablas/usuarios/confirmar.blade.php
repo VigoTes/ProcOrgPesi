@@ -2,10 +2,10 @@
 @section('contenido')
 
     <div class="container">
-        <h1>¿Desea eliminar el siguiente registro?</h1> 
+        <h1>¿Desea eliminar el siguiente usuario?</h1> 
         
         <h3>
-        idUsuario : {{ $usuario->id }} - Username  {{ $usuario->name }}  </h3>
+        idUsuario : {{ $usuario->id }} - Nombre de usuario:  {{ $usuario->name }}  </h3>
                                     {{-- nombre de la ruta,         atributo --}}
         <form method="POST" action="{{route('usuarios.destroy',$usuario->id)}}">
             @method('delete')

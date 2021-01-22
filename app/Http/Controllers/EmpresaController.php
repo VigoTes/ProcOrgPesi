@@ -29,9 +29,10 @@ class EmpresaController extends Controller
     public function index(Request $Request)
     {
         $usuario = Usuario::findOrFail(Auth::id());
-        $empresa = $usuario->empresasDelUsuario();
         
         $buscarpor = $Request->buscarpor;
+        $empresa = $usuario->empresasDelUsuario($buscarpor);
+        
         /* 
      
         $empresa = Empresa::where('estadoAct','=','1')
@@ -61,7 +62,7 @@ class EmpresaController extends Controller
         $buscarpor = $Request->buscarpor;
 
         $usuario = Usuario::findOrFail(Auth::id());
-        $empresa = $usuario->empresasDelUsuario();
+        $empresa = $usuario->empresasDelUsuario($buscarpor);
         /* 
         $empresa = Empresa::where('estadoAct','=','1')
             ->where('nombreEmpresa','like','%'.$buscarpor.'%')
@@ -242,7 +243,8 @@ class EmpresaController extends Controller
 
     public function confirmar($id){
         $empresa = Empresa::findOrFail($id); 
-        return view('tablas.empresas.confirmar',compact('empresa'));
+        $empresaFocus = $empresa;
+        return view('tablas.empresas.confirmar',compact('empresa','empresaFocus'));
     }
 
     /* FUNCION PARA REDIRIGIRNOS A LA MATRIZ FODA DE ESTA EMPRESA

@@ -13,8 +13,8 @@
             <br>
             Descripcion del Area: {{ $area->descripcionArea }}
             <br>
-            
-        
+            Al borrar esta area también borrará todas sus ocurrencias en las matrices en las que se haya usado.
+            <br>
                                     {{-- nombre de la ruta,         atributo --}}
         <form method="POST" action="{{route('area.destroy',$area->idArea)}}">
             @method('delete')

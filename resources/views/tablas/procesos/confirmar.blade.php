@@ -13,7 +13,8 @@
             <br>
             Descripcion del proceso: {{ $proceso->descripcionProceso }}
             <br>
-            
+            Al borrar este proceso también borrará todas sus ocurrencias en las matrices en las que se haya usado.
+            <br>
         
                                     {{-- nombre de la ruta,         atributo --}}
         <form method="POST" action="{{route('proceso.destroy',$proceso->idProceso)}}">

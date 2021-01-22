@@ -40,6 +40,10 @@ Route::get ('cambioedicion/{id}/listar','CambioEdicionController@listar')->name(
 Route::get ('empresa/{id}/listar','EmpresaController@listar')->name('empresa.listar');
 Route::get ('matriz/{id}/listar','MatrizController@listar')->name('matriz.listar');
 Route::get ('matriz/{id}/crear','MatrizController@crear')->name('matriz.crear');
+Route::get ('matriz/{id}/verinforme','MatrizController@verinforme')->name('matriz.verinforme');
+
+Route::get ('matriz/{id}/exportarInformePDF','MatrizController@exportarInformePDF')->name('matriz.exportarInformePDF');
+Route::get ('matriz/{id}/exportarInformeWord','MatrizController@exportarInformeWord')->name('matriz.exportarInformeWord');
 
 //                    idEmpresa
 

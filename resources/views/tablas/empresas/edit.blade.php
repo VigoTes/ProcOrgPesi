@@ -61,7 +61,7 @@
         
                 <label for="RUC">RUC de la Empresa</label>
                 <input type="text" class="form-control @error('RUC') is-invalid @enderror" id="RUC" name="RUC" 
-                    placeHolder="Ingrese RUC" value='{{$empresa->RUC}}' >
+                    placeHolder="Ingrese RUC" value='{{$empresa->ruc}}' >
                     @error('RUC')
                         <span class = "invalid-feedback" role ="alert">
                             <strong>{{ $message }} </strong>
