@@ -13,8 +13,9 @@
             <input type="hidden" name="idEmpresaFocus" id="idEmpresaFocus" value = {{$empresaFocus->idEmpresa}}>
 
             <div class="col">
+                 <br>
                 {{-- CONTENIDO DE LA COLUMNA --}}
-            <label for="nombreArea">Tipo de la matriz</label>
+            <label for="nombreArea">Tipo de la matriz</label> <i> (Una vez seleccionado el tipo de matriz, no se podrá alterar) </i>
                     <select class="custom-select" id="tipoMatriz" name="tipoMatriz">
                      
                         <option value="1" selected>Procesos vs Areas</option>
